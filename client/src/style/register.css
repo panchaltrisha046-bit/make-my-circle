@@ -1,0 +1,117 @@
+/* File Name: client/src/style/register.css */
+.reg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.reg-card {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02);
+  border: 1px solid #f1f5f9;
+  width: 100%;
+  max-width: 460px;
+}
+
+.reg-card h2 {
+  margin: 0 0 6px 0;
+  color: #1e293b;
+  font-size: 1.8rem;
+}
+
+.reg-subtitle {
+  color: #64748b;
+  margin: 0 0 24px 0;
+  font-size: 0.95rem;
+}
+
+.reg-group {
+  margin-bottom: 18px;
+}
+
+.reg-row {
+  display: flex;
+  gap: 14px;
+}
+
+.reg-row .reg-group {
+  flex: 1;
+}
+
+.reg-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.reg-group input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.reg-group input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.reg-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.reg-btn:hover {
+  background-color: #4338ca;
+}
+
+.reg-alert {
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.alert-danger { background-color: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; }
+.alert-success { background-color: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
+
+.reg-redirect {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.reg-redirect a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.reg-redirect a:hover {
+  text-decoration: underline;
+}
