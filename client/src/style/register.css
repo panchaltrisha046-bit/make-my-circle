@@ -1,117 +1,126 @@
-/* File Name: client/src/style/register.css */
-.reg-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.auth-container {
   min-height: 100vh;
-  background-color: #f8fafc;
-  font-family: system-ui, -apple-system, sans-serif;
-  padding: 40px 20px;
-  box-sizing: border-box;
-}
-
-.reg-card {
-  background: #ffffff;
-  padding: 35px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f5f9;
-  width: 100%;
-  max-width: 460px;
-}
-
-.reg-card h2 {
-  margin: 0 0 6px 0;
-  color: #1e293b;
-  font-size: 1.8rem;
-}
-
-.reg-subtitle {
-  color: #64748b;
-  margin: 0 0 24px 0;
-  font-size: 0.95rem;
-}
-
-.reg-group {
-  margin-bottom: 18px;
-}
-
-.reg-row {
   display: flex;
-  gap: 14px;
-}
-
-.reg-row .reg-group {
-  flex: 1;
-}
-
-.reg-group label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-  color: #475569;
-}
-
-.reg-group input {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
   background-color: #f8fafc;
-  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  padding: 2rem 1rem;
 }
 
-.reg-group input:focus {
-  outline: none;
-  border-color: #4f46e5;
+.auth-card {
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-}
-
-.reg-btn {
+  padding: 2.5rem;
+  border-radius: 12px;
   width: 100%;
-  padding: 12px;
-  background-color: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
+  max-width: 480px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-logo {
+  font-size: 1.1rem;
   font-weight: 600;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.2s;
+  color: #6366f1;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
-.reg-btn:hover {
-  background-color: #4338ca;
+.auth-header h2 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
 
-.reg-alert {
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-}
-
-.alert-danger { background-color: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; }
-.alert-success { background-color: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
-
-.reg-redirect {
-  margin-top: 24px;
-  font-size: 0.9rem;
+.auth-header p {
   color: #64748b;
+  font-size: 0.9rem;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #fee2e2;
   text-align: center;
 }
 
-.reg-redirect a {
-  color: #4f46e5;
-  text-decoration: none;
-  font-weight: 600;
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
-.reg-redirect a:hover {
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+.form-group input {
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: border-color 0.15s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group input[type="file"] {
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.btn-block {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.auth-footer a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
   text-decoration: underline;
 }
