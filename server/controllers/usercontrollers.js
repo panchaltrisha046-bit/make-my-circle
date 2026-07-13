@@ -1,48 +1,74 @@
-// File Name: usercontrollers.js
-const User = require('../models/User'); // Ensure your model path is correct if using it
+// File Name: server/controllers/usercontrollers.js
+const User = require('../models/user'); 
 
-// 1. REGISTER USER
 exports.registerUser = async (req, res) => {
-  try {
-    const { firstName, lastName, email, phone, password } = req.body;
-    const photoPath = req.file ? req.file.path : null;
+    try {
+        const { firstName, lastName, email, phone, password } = req.body;
+        
+        // 1. Check if Email already exists
+        const emailExists = await User.findOne({ email });
+        if (emailExists) {
+            return res.status(400).json({ message: 'This email address is already registered.' });
+        }
 
-    if (!firstName || !lastName || !email || !phone || !password) {
-      return res.status(400).json({ message: "All text fields are required." });
+        // 2. Check if Phone already exists manually before MongoDB blocks it
+        const phoneExists = await User.findOne({ phone });
+        if (phoneExists) {
+            return res.status(400).json({ message: 'This phone number is already registered to another account.' });
+        }
+
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            phone,
+            password, 
+            photo: req.file ? req.file.filename : null
+        });
+
+        await newUser.save();
+
+        res.status(201).json({ 
+            message: 'Registration successful!',
+            user: { firstName, lastName, email, phone }
+        });
+    } catch (error) {
+        console.error("Register Error:", error);
+        
+        // Safety check for other duplicate key edge-cases
+        if (error.code === 11000) {
+            return res.status(400).json({ message: 'Account details already exist.' });
+        }
+        
+        res.status(500).json({ message: 'Internal server error', error: error.message });
     }
-
-    const newUser = new User({ 
-      firstName, 
-      lastName, 
-      email, 
-      phone, 
-      password, 
-      photo: photoPath 
-    });
-
-    await newUser.save();
-
-    return res.status(201).json({ 
-      message: "User registered successfully!"
-    });
-
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error", error: error.message });
-  }
 };
 
-// 2. LOGIN USER (CRITICAL: Make sure this is named exactly 'loginUser')
 exports.loginUser = async (req, res) => {
-  try {
-    const { loginIdentifier, password } = req.body;
+    try {
+        const { email, password } = req.body; 
+        
+        const user = await User.findOne({ email: email });
 
-    if (!loginIdentifier || !password) {
-      return res.status(400).json({ message: "Please provide your credentials." });
+        if (!user) {
+            return res.status(400).json({ message: 'Account not found with this email.' });
+        }
+
+        if (user.password !== password) {
+            return res.status(400).json({ message: 'Incorrect password.' });
+        }
+
+        res.status(200).json({
+            message: 'Logged in successfully!',
+            user: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone
+            }
+        });
+    } catch (error) {
+        console.error("Login Error:", error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-
-    // Temporary basic check to let the route pass:
-    return res.status(200).json({ message: "Login successful!" });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error", error: error.message });
-  }
 };

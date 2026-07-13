@@ -1,17 +1,139 @@
-@import url('./register.css');
-
-.label-wrapper {
+/* Container layout matching your desktop view centering */
+.login-container, .reg-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 20px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
 }
 
-.forgot-password {
-  font-size: 0.8rem;
-  color: #6366f1;
+/* Card layout wrapper */
+.login-card, .reg-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+/* Titles and subheadings */
+.login-title, .reg-title {
+  color: #4f46e5;
+  margin: 0 0 8px 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.login-subtitle, .reg-subtitle {
+  color: #1e293b;
+  margin: 0 0 6px 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+/* Form group rows (Used for First Name / Last Name split) */
+.reg-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Individual inputs container */
+.login-group, .reg-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.login-group label, .reg-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.login-group input, .reg-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Active focus behaviors */
+.login-group input:focus, .reg-group input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Primary Form Buttons */
+.login-btn, .reg-btn {
+  width: 100%;
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover, .reg-btn:hover {
+  background-color: #4338ca;
+}
+
+/* Dynamic status messages alerts matches your screenshots */
+.login-alert, .reg-alert {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.alert-danger {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.alert-success {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+/* Bottom redirect link routing styles */
+.login-redirect, .reg-redirect {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.login-redirect a, .reg-redirect a {
+  color: #4f46e5;
   text-decoration: none;
+  font-weight: 600;
 }
 
-.forgot-password:hover {
+.login-redirect a:hover, .reg-redirect a:hover {
   text-decoration: underline;
 }

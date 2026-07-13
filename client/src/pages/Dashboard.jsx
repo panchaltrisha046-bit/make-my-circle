@@ -1,76 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// File Name: client/src/pages/Dashboard.jsx
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Hook for smooth client-side routing
 import '../style/Dashboard.css';
 
-const Dashboard = () => {
+function Dashboard() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    firstName: 'User',
-    lastName: '',
-    email: '',
-    phone: '',
-    photoPath: ''
-  });
-
-  // Simple logout procedure
-  const handleLogout = () => {
-    // If you stored a token during login, clear it here:
-    // localStorage.removeItem('token');
-    navigate('/login');
-  };
 
   return (
-    <div className="dashboard-layout">
-      {/* Top Navbar */}
-      <header className="dashboard-nav">
-        <div className="nav-brand">Make My Circle</div>
-        <button className="logout-btn" onClick={handleLogout}>Sign Out</button>
-      </header>
-
-      <div className="dashboard-container">
-        {/* Sidebar */}
-        <aside className="sidebar">
-          <ul className="sidebar-menu">
-            <li className="menu-item active">🏠 My Feed</li>
-            <li className="menu-item">👥 My Circles</li>
-            <li className="menu-item">⚙️ Settings</li>
+    <div className="dashboard-grid">
+      
+      {/* COLUMN 1: SIDEBAR NAVIGATION */}
+      <aside className="sidebar">
+        <div className="brand-container">
+          <h2 className="brand-name">Make My Circle</h2>
+        </div>
+        <nav className="nav-menu">
+          <ul>
+            <li className="nav-item active" onClick={() => navigate('/dashboard')}>
+              Home
+            </li>
+            <li className="nav-item" onClick={() => navigate('/profile')}>
+              Profile
+            </li>
+            <li className="nav-item" onClick={() => alert("Friends feature under construction!")}>
+              Friends
+            </li>
+            <li className="nav-item" onClick={() => alert("Messages feature under construction!")}>
+              Messages
+            </li>
+            <li className="nav-item logout" onClick={() => { localStorage.clear(); navigate('/login'); }}>
+              Logout
+            </li>
           </ul>
-        </aside>
+        </nav>
+      </aside>
 
-        {/* Main Workspace Area */}
-        <main className="main-workspace">
-          <div className="welcome-banner">
-            <h2>Welcome back, {user.firstName}!</h2>
-            <p>Here is what's happening within your professional circles today.</p>
-          </div>
+      {/* COLUMN 2: MAIN WORKSPACE CONTAINER */}
+      <main className="feed-channel">
+        <div className="simple-box">
+          <h2>Main Content Area</h2>
+          <p>This is where the post creator and activity feed will go on Days 2, 3, and 4.</p>
+        </div>
+      </main>
 
-          <div className="workspace-grid">
-            {/* Quick Profile Status Panel */}
-            <div className="dashboard-card profile-summary">
-              <h3>My Profile Card</h3>
-              <div className="profile-badge-layout">
-                <div className="avatar-placeholder">👤</div>
-                <div className="profile-badge-details">
-                  <h4>{user.firstName} {user.lastName}</h4>
-                  <p>{user.email || 'no-email@circle.com'}</p>
-                  <p className="phone-tag">📱 {user.phone || 'No phone verified'}</p>
-                </div>
-              </div>
-            </div>
+      {/* COLUMN 3: RIGHT UTILITY PANEL */}
+      <aside className="profile-widget-panel">
+        <div className="simple-box">
+          <h2>Right Panel</h2>
+          <p>This side panel will hold your friend suggestions and online stats later.</p>
+        </div>
+      </aside>
 
-            {/* Empty Feed State or Circle Creation panel */}
-            <div className="dashboard-card activity-feed">
-              <h3>Your Circle Updates</h3>
-              <div className="empty-state">
-                <p>Your connections haven't posted updates yet.</p>
-                <button className="action-btn-secondary">Invite Peers to Your Circle</button>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
     </div>
   );
-};
+}
 
 export default Dashboard;

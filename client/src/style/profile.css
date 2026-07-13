@@ -1,80 +1,174 @@
-/* File Name: client/src/style/profile.css */
-
-.profile-container {
-  max-width: 750px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: system-ui, -apple-system, sans-serif;
+/* Basic page setup */
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Header summary section card */
+body {
+  background-color: #f8fafc;
+  font-family: system-ui, sans-serif;
+  color: #0f172a;
+}
+
+/* Page wrapper */
+.profile-page-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* BACK TO DASHBOARD BUTTON */
+.profile-navigation-header {
+  margin-bottom: 15px;
+}
+
+.btn-back-link {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #4f46e5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-back-link:hover {
+  background-color: #f1f5f9;
+}
+
+/* --- COVER AND HEADER COMPONENT --- */
 .profile-header-card {
   background: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 20px;
-  padding: 35px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.cover-photo {
+  height: 160px;
+  background: #6366f1;
+}
+
+.profile-identity-row {
+  padding: 0 20px 20px 20px;
+  margin-top: -50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.avatar-frame {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  padding: 5px;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #4f46e5;
+  font-size: 2rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 28px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.01);
+  justify-content: center;
 }
 
-.profile-avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #eef2ff; /* Soft contrast outline glow */
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.08);
+.btn-edit-profile {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.profile-info {
-  flex: 1;
+.btn-edit-profile:hover {
+  background-color: #f8fafc;
 }
 
-.profile-info h1 {
-  margin: 0 0 6px 0;
-  color: #1e293b;
-  font-size: 2rem;
-  letter-spacing: -0.5px;
+/* --- USER INFO DETAILS --- */
+.profile-details-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.profile-info p {
-  margin: 0 0 16px 0;
+.user-fullname {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.user-handle {
   color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.user-bio {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #334155;
+}
+
+.meta-info-row {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.meta-info-row span {
+  margin-right: 20px;
+}
+
+.stats-counter-row {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 15px;
+}
+
+.stat-pill {
+  display: inline-block;
+  margin-right: 20px;
   font-size: 0.95rem;
 }
 
-/* User metrics data display panels split */
-.profile-details-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
-  margin-top: 25px;
+/* --- RECENT ACTIVITY STREAM --- */
+.user-posts-section {
+  margin-top: 10px;
 }
 
-.detail-box {
-  background: #ffffff;
-  padding: 16px 20px;
-  border-radius: 12px;
-  border: 1px solid #f1f5f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.005);
+.section-title {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #475569;
 }
 
-.detail-box label {
-  font-size: 0.75rem;
+.posts-history-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.simple-post-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.post-date {
+  font-size: 0.8rem;
   color: #94a3b8;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  margin-bottom: 5px;
   display: block;
-  margin-bottom: 4px;
-}
-
-.detail-box p {
-  margin: 0;
-  color: #334155;
-  font-size: 1rem;
-  font-weight: 500;
 }

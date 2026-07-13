@@ -1,163 +1,84 @@
+// File Name: client/src/pages/Register.jsx
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../style/register.css';
+import { Link } from 'react-router-dom';
+import '../style/register.css'; 
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    password: ''
-  });
-  const [profileImage, setProfileImage] = useState(null);
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+  const [photo, setPhoto] = useState(null);
+  const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
-  const [isRegistered, setIsRegistered] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleFileChange = (e) => {
-    setProfileImage(e.target.files[0]);
+    setPhoto(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
-    const cleanEmail = formData.email.replace(/\s+/g, '');
+    try {
+      const dataToSend = new FormData();
+      dataToSend.append('firstName', formData.firstName);
+      dataToSend.append('lastName', formData.lastName);
+      dataToSend.append('email', formData.email);
+      dataToSend.append('phone', formData.phone);
+      dataToSend.append('password', formData.password);
+      if (photo) {
+        dataToSend.append('photo', photo); 
+      }
 
-    const dataToSend = new FormData();
-    dataToSend.append('firstName', formData.firstName);
-    dataToSend.append('lastName', formData.lastName);
-    dataToSend.append('email', cleanEmail);
-    dataToSend.append('phone', formData.phone);
-    dataToSend.append('password', formData.password);
-    
-    if (profileImage) {
-      dataToSend.append('photo', profileImage);
-    }
-
-    fetch('http://localhost:5000/api/users/register', {
-      method: 'POST',
-      body: dataToSend
-    })
-      .then((response) => {
-        return response.json().then((data) => {
-          if (!response.ok) {
-            throw new Error(data.message || 'Registration failed.');
-          }
-          return data;
-        });
-      })
-      .then((data) => {
-        setIsRegistered(true);
-        setTimeout(() => {
-          navigate('/login');
-        }, 2500);
-      })
-      .catch((err) => {
-        setError(err.message || 'Something went wrong connecting with the server.');
+      const response = await fetch('http://localhost:5000/api/users/register', {
+        method: 'POST',
+        body: dataToSend,
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      setSuccess('Registration successful! Redirecting...');
+      
+      // CRITICAL: Save the actual photo name returned by the server database
+      localStorage.setItem('userProfile', JSON.stringify({
+        firstName: data.user?.firstName || formData.firstName,
+        lastName: data.user?.lastName || formData.lastName,
+        email: data.user?.email || formData.email,
+        phone: data.user?.phone || formData.phone,
+        photo: data.user?.photo || '' // <--- Saved from server response
+      }));
+
+      setTimeout(() => {
+        window.location.assign('/dashboard');
+      }, 1000);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        {isRegistered ? (
-          /* SUCCESS VIEW CONTAINER */
-          <div style={{ textAlign: 'center', padding: '30px 10px' }}>
-            <div style={{ fontSize: '3.5rem', marginBottom: '15px' }}>🎉</div>
-            <h2 style={{ color: '#2b6cb0', marginBottom: '10px' }}>Account Created!</h2>
-            <div style={{
-              color: '#155724', 
-              backgroundColor: '#d4edda', 
-              borderColor: '#c3e6cb',
-              padding: '12px', 
-              borderRadius: '6px', 
-              fontSize: '0.95rem',
-              fontWeight: '600',
-              border: '1px solid',
-              display: 'inline-block',
-              margin: '10px 0'
-            }}>
-              Registration successfully completed!
-            </div>
-            <p style={{ color: '#64748b', marginTop: '15px', fontSize: '0.9rem' }}>
-              Redirecting you to the login screen now...
-            </p>
+    <div className="reg-container">
+      <div className="reg-card">
+        <h2 className="reg-title" style={{color: '#4f46e5', fontWeight: 'bold'}}>Make My Circle</h2>
+        <h3 className="reg-subtitle">Create your account</h3>
+        {success && <div className="reg-alert alert-success">{success}</div>}
+        {error && <div className="reg-alert alert-danger">{error}</div>}
+
+        <form onSubmit={handleRegisterSubmit}>
+          <div className="reg-row"><div className="reg-group"><label>First Name</label><input type="text" required value={formData.firstName} onChange={(e) => setFormData({...formData, firstName: e.target.value})} /></div><div className="reg-group"><label>Last Name</label><input type="text" required value={formData.lastName} onChange={(e) => setFormData({...formData, lastName: e.target.value})} /></div></div>
+          <div className="reg-group"><label>Email Address</label><input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} /></div>
+          <div className="reg-group"><label>Phone Number</label><input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} /></div>
+          <div className="reg-group"><label>Password</label><input type="password" required value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} /></div>
+          <div className="reg-group">
+            <label>Upload Profile Picture</label>
+            <input type="file" accept="image/*" onChange={handleFileChange} required />
           </div>
-        ) : (
-          /* STANDARD REGISTRATION FORM INPUT MODULE */
-          <>
-            <div className="auth-header">
-              <Link to="/" className="auth-logo">Make My Circle</Link>
-              <h2>Create your account</h2>
-              <p>Join an intentional community of professionals.</p>
-            </div>
-
-            {error && <div className="error-message">{error}</div>}
-
-            <form onSubmit={handleSubmit} className="auth-form" encType="multipart/form-data">
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input 
-                    type="text" id="firstName" name="firstName" placeholder="John" 
-                    value={formData.firstName} onChange={handleChange} required 
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input 
-                    type="text" id="lastName" name="lastName" placeholder="Doe" 
-                    value={formData.lastName} onChange={handleChange} required 
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input 
-                  type="email" id="email" name="email" placeholder="you@example.com" 
-                  value={formData.email} onChange={handleChange} required 
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
-                <input 
-                  type="tel" id="phone" name="phone" placeholder="1234567890" 
-                  value={formData.phone} onChange={handleChange} required 
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input 
-                  type="password" id="password" name="password" placeholder="•••••••• (Min 6 chars)" 
-                  value={formData.password} onChange={handleChange} required 
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="profilePhoto" className="file-label">Upload Profile Picture</label>
-                <input 
-                  type="file" id="profilePhoto" accept="image/*" 
-                  onChange={handleFileChange} required
-                />
-              </div>
-
-              <button type="submit" className="btn btn-primary btn-block">Create Account</button>
-            </form>
-
-            <div className="auth-footer">
-              <p>Already have an account? <Link to="/login">Sign in</Link></p>
-            </div>
-          </>
-        )}
+          <button type="submit" className="reg-btn">Register</button>
+        </form>
+        <p className="reg-redirect">Already have an account? <Link to="/login">Sign in</Link></p>
       </div>
     </div>
   );

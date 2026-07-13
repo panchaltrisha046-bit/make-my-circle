@@ -1,4 +1,4 @@
-/* Soft & Clean Color Variable Configuration */
+
 :root {
   --bg-color: #fcfdfd;
   --text-dark: #2d3748;
@@ -17,7 +17,6 @@
   padding: 0 2rem;
 }
 
-/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -41,7 +40,6 @@
   gap: 1.5rem;
 }
 
-/* Minimalist Hero Layout */
 .hero-section {
   max-width: 1000px;
   margin: 0 auto;
@@ -75,7 +73,6 @@
   gap: 1rem;
 }
 
-/* Standard Simple Buttons */
 .link-btn {
   color: var(--text-light);
   text-decoration: none;
@@ -122,7 +119,6 @@
   padding: 0.75rem 1.7rem;
 }
 
-/* Responsive adjustment */
 @media (max-width: 600px) {
   .hero-section { padding: 4rem 0; }
   .hero-inner h1 { font-size: 2rem; }
