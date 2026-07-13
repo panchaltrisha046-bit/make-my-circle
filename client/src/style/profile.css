@@ -84,7 +84,6 @@ body {
   font-weight: bold;
 }
 
-/* --- 4. EDIT PROFILE BUTTON (Styled to pop on blue) --- */
 .btn-edit-profile {
   background: #ffffff;
   border: none;
@@ -101,7 +100,7 @@ body {
 .btn-edit-profile:hover {
   background: #f1f5f9;
 }
-/* --- USER INFO DETAILS --- */
+
 .profile-details-card {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;

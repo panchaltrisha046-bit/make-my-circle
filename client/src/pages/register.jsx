@@ -78,7 +78,7 @@ const Register = () => {
           </div>
           <button type="submit" className="reg-btn">Register</button>
         </form>
-        <p className="reg-redirect">Already have an account? <Link to="/login">Sign in</Link></p>
+        <p className="reg-redirect">Already have an account? <Link to="/login">Loin In </Link></p>
       </div>
     </div>
   );

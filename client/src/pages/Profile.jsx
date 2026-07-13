@@ -1,4 +1,4 @@
-// File Name: client/src/pages/Profile.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profile.css';
