@@ -18,7 +18,7 @@ body {
   padding: 0 20px;
 }
 
-/* BACK TO DASHBOARD BUTTON */
+/*BACK TO DASHBOARD BUTTON*/
 .profile-navigation-header {
   margin-bottom: 15px;
 }
@@ -26,7 +26,7 @@ body {
 .btn-back-link {
   background-color: #ffffff;
   border: 1px solid #cbd5e1;
-  color: #4f46e5;
+  color: #4c51bf;
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: 600;
@@ -40,59 +40,66 @@ body {
 
 /* --- COVER AND HEADER COMPONENT --- */
 .profile-header-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: #4c51bf;
+  border: 1px solid #4c51bf;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
 }
 
-.cover-photo {
-  height: 160px;
-  background: #6366f1;
+.cover-photo { 
+  height: 120px; 
+  background-color: #4c51bf;
 }
 
 .profile-identity-row {
-  padding: 0 20px 20px 20px;
-  margin-top: -50px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -60px; /* Pulls the avatar up over the middle line */
+  padding-bottom: 24px;
+  gap: 12px;
 }
 
 .avatar-frame {
-  width: 100px;
+  width: 100px; 
   height: 100px;
+  background: #ffffff; /* Keeps a crisp white circle boundary */
   border-radius: 50%;
-  background-color: #ffffff;
-  padding: 5px;
-}
-
-.avatar-placeholder {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #e2e8f0;
-  color: #4f46e5;
-  font-size: 2rem;
-  font-weight: bold;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.avatar-placeholder {
+  width: 100%; 
+  height: 100%;
+  background: #e0e7ff;
+  color: #6366f1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 .btn-edit-profile {
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #475569;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 600;
+  background: #ffffff;
+  border: none;
+  color: #4c51bf;
+  padding: 8px 18px;
+  border-radius: 20px; /* Smooth rounded button */
   cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s;
 }
 
 .btn-edit-profile:hover {
-  background-color: #f8fafc;
+  background: #f1f5f9;
 }
 
 /* --- USER INFO DETAILS --- */

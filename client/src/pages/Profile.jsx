@@ -1,7 +1,7 @@
 // File Name: client/src/pages/Profile.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/Profile.css';
+import '../style/profile.css';
 
 function Profile() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Profile() {
       {/* CLEAN BACK TO DASHBOARD NAVIGATION LINK LINKED TO ROUTER */}
       <div className="profile-navigation-header">
         <button className="btn-back-link" onClick={() => navigate('/dashboard')}>
-         Back to Homepage
+         Back to Dashboard
         </button>
       </div>
 
@@ -33,7 +33,7 @@ function Profile() {
           <div className="avatar-frame">
             <div className="avatar-placeholder">{user.name.charAt(0)}</div>
           </div>
-          <button className="btn-edit-profile" onClick={() => alert()}>
+          <button className="btn-edit-profile" onClick={() => alert("Profile Edited")}>
             Edit Profile
           </button>
         </div>
@@ -64,8 +64,8 @@ function Profile() {
         <div className="posts-history-grid">
           <div className="simple-post-card">
             <span className="post-date">3 hours ago</span>
-            <p>"I am a developer focused on building clean web applications and learning new coding skills every day."</p>
-          </div>
+            <p>Welcome to Make My Circle. Connect with friends, share your daily updates, and build your community easily.</p>
+            </div>
 
         </div>
       </section>

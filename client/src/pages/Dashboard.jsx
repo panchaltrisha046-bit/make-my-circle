@@ -39,7 +39,6 @@ function Dashboard() {
       <main className="feed-channel">
         <div className="simple-box">
           <h2>Main Content Area</h2>
-          <p>This is where the post creator and activity feed will go on Days 2, 3, and 4.</p>
         </div>
       </main>
 
@@ -47,7 +46,6 @@ function Dashboard() {
       <aside className="profile-widget-panel">
         <div className="simple-box">
           <h2>Right Panel</h2>
-          <p>This side panel will hold your friend suggestions and online stats later.</p>
         </div>
       </aside>
 

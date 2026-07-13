@@ -57,7 +57,7 @@ const Login = () => {
         <form onSubmit={handleLoginSubmit}>
           <div className="login-group"><label>Email Address</label><input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></div>
           <div className="login-group"><label>Password</label><input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} /></div>
-          <button type="submit" className="login-btn">Sign In</button>
+          <button type="submit" className="login-btn">Log In</button>
         </form>
         <p className="login-redirect">Don't have an account? <Link to="/register">Sign up</Link></p>
       </div>
