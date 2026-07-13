@@ -1,20 +1,46 @@
 // File Name: client/src/pages/Profile.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profile.css';
 
 function Profile() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  const [user] = useState({
-    name: "Diya Patel",
-    handle: "@diyapatel_0001",
-    bio: "UI/UX Designer turned MERN Stack Developer. Passionate about building clean, accessible, and user-centered web applications. Always up for a coffee and a frontend chat!",
-    location: "Surat,Gujrat,India",
-    joinedDate: "Joined March 2026",
-    postsCount: 8,
-    friendsCount: 194
-  });
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('userProfile') || 'null');
+
+    if (!storedUser) {
+      navigate('/login');
+      return;
+    }
+
+    if (storedUser.id) {
+      fetch(`http://localhost:5000/api/users/${storedUser.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.user) {
+            setUser(data.user);
+            localStorage.setItem('userProfile', JSON.stringify(data.user));
+          } else {
+            setUser(storedUser);
+          }
+        })
+        .catch(() => setUser(storedUser));
+    } else {
+      setUser(storedUser);
+    }
+  }, [navigate]);
+
+  if (!user) {
+    return <div className="profile-page-container">Loading profile...</div>;
+  }
+
+  const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'User';
+  const avatarText = fullName.charAt(0).toUpperCase() || 'U';
+  const joinedDate = user.createdAt
+    ? `Joined ${new Date(user.createdAt).toLocaleString('en', { month: 'long', year: 'numeric' })}`
+    : 'Joined recently';
 
   return (
     <div className="profile-page-container">
@@ -31,7 +57,11 @@ function Profile() {
         <div className="cover-photo"></div>
         <div className="profile-identity-row">
           <div className="avatar-frame">
-            <div className="avatar-placeholder">{user.name.charAt(0)}</div>
+            {user.photo ? (
+              <img src={user.photo} alt={fullName} className="avatar-placeholder" style={{ objectFit: 'cover' }} />
+            ) : (
+              <div className="avatar-placeholder">{avatarText}</div>
+            )}
           </div>
           <button className="btn-edit-profile" onClick={() => alert("Profile Edited")}>
             Edit Profile
@@ -41,25 +71,25 @@ function Profile() {
 
       {/* 2. USER DETAILS CARD */}
       <section className="profile-details-card">
-        <h1 className="user-fullname">{user.name}</h1>
-        <p className="user-handle">{user.handle}</p>
+        <h1 className="user-fullname">{fullName}</h1>
+        <p className="user-handle">{user.email}</p>
         
-        <p className="user-bio">{user.bio}</p>
+        <p className="user-bio">Welcome to your profile page. Your account details are loaded from MongoDB.</p>
         
         <div className="meta-info-row">
-          <span>Location: {user.location}</span>
-          <span>Timeline: {user.joinedDate}</span>
+          <span>Phone: {user.phone || 'Not added'}</span>
+          <span>Timeline: {joinedDate}</span>
         </div>
 
         <div className="stats-counter-row">
-          <div className="stat-pill"><strong>{user.postsCount}</strong> Posts</div>
-          <div className="stat-pill"><strong>{user.friendsCount}</strong> Friends</div>
+          <div className="stat-pill"><strong>1</strong> Profile</div>
+          <div className="stat-pill"><strong>0</strong> Requests</div>
         </div>
       </section>
 
       {/* 3. USER'S PAST POSTS WORKSPACE */}
       <section className="user-posts-section">
-        <h3 className="section-title">Diya's Recent Activity</h3>
+        <h3 className="section-title">{fullName}'s Recent Activity</h3>
         
         <div className="posts-history-grid">
           <div className="simple-post-card">

@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 import Register from './pages/register';
 import Login from './pages/login';
-import Dashboard from './pages/dashboard';
+import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
-import Profile from './pages/Profile'; 
+import Profile from './pages/Profile';
 
 function App() {
   return (

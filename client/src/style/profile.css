@@ -1,4 +1,4 @@
-/* Basic page setup */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,14 +11,13 @@ body {
   color: #0f172a;
 }
 
-/* Page wrapper */
 .profile-page-container {
   max-width: 800px;
   margin: 30px auto;
-  padding: 0 20px;
+  padding: 0 20px 40px;
+  min-height: 100vh;
 }
 
-/*BACK TO DASHBOARD BUTTON*/
 .profile-navigation-header {
   margin-bottom: 15px;
 }
@@ -32,16 +31,16 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
 .btn-back-link:hover {
-  background-color: #f1f5f9;
+  background-color: #eef2ff;
 }
 
-/* --- COVER AND HEADER COMPONENT --- */
 .profile-header-card {
-  background-color: #4c51bf;
-  border: 1px solid #4c51bf;
+  background-color: #6366f1; 
+  border: 1px solid #6366f1;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -49,14 +48,14 @@ body {
 
 .cover-photo { 
   height: 120px; 
-  background-color: #4c51bf;
+  background-color: #6366f1; 
 }
 
 .profile-identity-row {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -60px; /* Pulls the avatar up over the middle line */
+  margin-top: -60px; 
   padding-bottom: 24px;
   gap: 12px;
 }
@@ -64,7 +63,7 @@ body {
 .avatar-frame {
   width: 100px; 
   height: 100px;
-  background: #ffffff; /* Keeps a crisp white circle boundary */
+  background: #ffffff; 
   border-radius: 50%;
   padding: 4px;
   display: flex;
@@ -85,12 +84,13 @@ body {
   font-weight: bold;
 }
 
+/* --- 4. EDIT PROFILE BUTTON (Styled to pop on blue) --- */
 .btn-edit-profile {
   background: #ffffff;
   border: none;
-  color: #4c51bf;
+  color: #6366f1;
   padding: 8px 18px;
-  border-radius: 20px; /* Smooth rounded button */
+  border-radius: 20px; 
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
@@ -101,7 +101,6 @@ body {
 .btn-edit-profile:hover {
   background: #f1f5f9;
 }
-
 /* --- USER INFO DETAILS --- */
 .profile-details-card {
   background-color: #ffffff;
@@ -109,11 +108,13 @@ body {
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .user-fullname {
   font-size: 1.5rem;
   margin-bottom: 2px;
+  color: #111827;
 }
 
 .user-handle {
@@ -126,27 +127,30 @@ body {
   font-size: 1rem;
   margin-bottom: 15px;
   color: #334155;
+  line-height: 1.6;
 }
 
 .meta-info-row {
   margin-bottom: 15px;
   font-size: 0.9rem;
   color: #64748b;
-}
-
-.meta-info-row span {
-  margin-right: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .stats-counter-row {
   border-top: 1px solid #f1f5f9;
   padding-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .stat-pill {
   display: inline-block;
-  margin-right: 20px;
   font-size: 0.95rem;
+  color: #334155;
 }
 
 /* --- RECENT ACTIVITY STREAM --- */
@@ -171,6 +175,12 @@ body {
   border: 1px solid #e2e8f0;
   border-radius: 10px;
   padding: 20px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.simple-post-card p {
+  line-height: 1.6;
+  color: #334155;
 }
 
 .post-date {

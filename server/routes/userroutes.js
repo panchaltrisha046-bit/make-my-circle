@@ -10,4 +10,7 @@ router.post('/register', upload.single('photo'), userController.registerUser);
 // POST: /api/users/login
 router.post('/login', userController.loginUser);
 
+// GET: /api/users/:id
+router.get('/:id', userController.getUserProfile);
+
 module.exports = router;

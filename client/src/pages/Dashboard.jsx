@@ -1,10 +1,24 @@
 // File Name: client/src/pages/Dashboard.jsx
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Hook for smooth client-side routing
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/Dashboard.css';
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('userProfile') || 'null');
+
+    if (!storedUser) {
+      navigate('/login');
+      return;
+    }
+
+    setUser(storedUser);
+  }, [navigate]);
+
+  const fullName = user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() : 'User';
 
   return (
     <div className="dashboard-grid">
@@ -38,14 +52,14 @@ function Dashboard() {
       {/* COLUMN 2: MAIN WORKSPACE CONTAINER */}
       <main className="feed-channel">
         <div className="simple-box">
-          <h2>Main Content Area</h2>
+          <h2>User Profiles</h2>
         </div>
       </main>
 
       {/* COLUMN 3: RIGHT UTILITY PANEL */}
       <aside className="profile-widget-panel">
         <div className="simple-box">
-          <h2>Right Panel</h2>
+          <h2>Request Pannel</h2>
         </div>
       </aside>
 

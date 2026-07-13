@@ -28,15 +28,17 @@ const Login = () => {
       }
 
       setSuccess('Logged in successfully! Redirecting...');
-      
-      // CRITICAL: Storing the profile image string on login too
-      localStorage.setItem('userProfile', JSON.stringify({
+
+      const userData = {
+        id: data.user?.id || '',
         firstName: data.user?.firstName || 'User',
         lastName: data.user?.lastName || '',
         email: data.user?.email || email,
         phone: data.user?.phone || '',
-        photo: data.user?.photo || '' // <--- Grabbed here
-      }));
+        photo: data.user?.photo ? `http://localhost:5000/uploads/${data.user.photo}` : ''
+      };
+
+      localStorage.setItem('userProfile', JSON.stringify(userData));
 
       setTimeout(() => {
         window.location.assign('/dashboard');

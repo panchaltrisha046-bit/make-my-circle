@@ -61,14 +61,41 @@ exports.loginUser = async (req, res) => {
         res.status(200).json({
             message: 'Logged in successfully!',
             user: {
+                id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                phone: user.phone
+                phone: user.phone,
+                photo: user.photo
             }
         });
     } catch (error) {
         console.error("Login Error:", error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+exports.getUserProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).select('-password');
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        res.status(200).json({
+            user: {
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone,
+                photo: user.photo,
+                createdAt: user.createdAt
+            }
+        });
+    } catch (error) {
+        console.error('Get user profile error:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
