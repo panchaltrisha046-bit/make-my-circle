@@ -25,7 +25,6 @@ const Login = () => {
       if (!response.ok) {
         throw new Error(data.message || 'Invalid password');
       }
-
       setSuccess('Logged in successfully!...');
 
       const userData = {
