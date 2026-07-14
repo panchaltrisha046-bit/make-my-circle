@@ -1,101 +1,127 @@
-// File Name: server/controllers/usercontrollers.js
-const User = require('../models/user'); 
+const User = require('../models/user'); // Ensure this matches your file name (user.js)
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-exports.registerUser = async (req, res) => {
-    try {
-        const { firstName, lastName, email, phone, password } = req.body;
-        
-        // 1. Check if Email already exists
-        const emailExists = await User.findOne({ email });
-        if (emailExists) {
-            return res.status(400).json({ message: 'This email address is already registered.' });
-        }
-
-        // 2. Check if Phone already exists manually before MongoDB blocks it
-        const phoneExists = await User.findOne({ phone });
-        if (phoneExists) {
-            return res.status(400).json({ message: 'This phone number is already registered to another account.' });
-        }
-
-        const newUser = new User({
-            firstName,
-            lastName,
-            email,
-            phone,
-            password, 
-            photo: req.file ? req.file.filename : null
-        });
-
-        await newUser.save();
-
-        res.status(201).json({ 
-            message: 'Registration successful!',
-            user: { firstName, lastName, email, phone }
-        });
-    } catch (error) {
-        console.error("Register Error:", error);
-        
-        // Safety check for other duplicate key edge-cases
-        if (error.code === 11000) {
-            return res.status(400).json({ message: 'Account details already exist.' });
-        }
-        
-        res.status(500).json({ message: 'Internal server error', error: error.message });
-    }
+// Helper to generate token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET || 'secret_fallback_key', {
+    expiresIn: '30d',
+  });
 };
 
-exports.loginUser = async (req, res) => {
-    try {
-        const { email, password } = req.body; 
-        
-        const user = await User.findOne({ email: email });
-
-        if (!user) {
-            return res.status(400).json({ message: 'Account not found with this email.' });
-        }
-
-        if (user.password !== password) {
-            return res.status(400).json({ message: 'Incorrect password.' });
-        }
-
-        res.status(200).json({
-            message: 'Logged in successfully!',
-            user: {
-                id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                phone: user.phone,
-                photo: user.photo
-            }
-        });
-    } catch (error) {
-        console.error("Login Error:", error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
-
+// 1. Get Logged-in User Profile
 exports.getUserProfile = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id).select('-password');
-
-        if (!user) {
-            return res.status(404).json({ message: 'User not found.' });
-        }
-
-        res.status(200).json({
-            user: {
-                id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                phone: user.phone,
-                photo: user.photo,
-                createdAt: user.createdAt
-            }
-        });
-    } catch (error) {
-        console.error('Get user profile error:', error);
-        res.status(500).json({ message: 'Internal server error' });
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
     }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to retrieve profile.', error: error.message });
+  }
 };
+
+// 2. Get All Users Except Me
+exports.getAllUsersExceptMe = async (req, res) => {
+  try {
+    const currentUserId = req.user.id;
+    const users = await User.find({ _id: { $ne: currentUserId } }).select('-password');
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching directory data.', error: error.message });
+  }
+};
+
+// 3. Register User
+exports.register = async (req, res) => {
+  try {
+    const { firstName, lastName, email, phone, password } = req.body;
+
+    if (!firstName || !lastName || !email || !phone || !password) {
+      return res.status(400).json({ message: 'Please enter all fields' });
+    }
+
+    const userExists = await User.findOne({ $or: [{ email }, { phone }] });
+    if (userExists) {
+      return res.status(400).json({ message: 'User already exists with this email or phone' });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Get uploaded filename if any
+    const photo = req.file ? req.file.filename : '';
+
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      phone,
+      password: hashedPassword,
+      photo,
+    });
+
+    if (user) {
+      res.status(201).json({
+        user: {
+          id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phone,
+          photo: user.photo,
+        },
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(400).json({ message: 'Invalid user data' });
+    }
+  } catch (error) {
+    console.error('Register error:', error);
+    res.status(500).json({ message: 'Registration failed', error: error.message });
+  }
+};
+
+// 4. Login User
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Please enter all fields' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    let isMatch = false;
+    if (user.password && (user.password.startsWith('$2a$') || user.password.startsWith('$2b$') || user.password.startsWith('$2y$'))) {
+      isMatch = await bcrypt.compare(password, user.password);
+    } else {
+      isMatch = password === user.password;
+    }
+
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    res.status(200).json({
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        photo: user.photo,
+      },
+      token: generateToken(user._id),
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Login failed', error: error.message });
+  }
+};

@@ -39,6 +39,7 @@ const Login = () => {
       };
 
       localStorage.setItem('userProfile', JSON.stringify(userData));
+      localStorage.setItem('token', data.token);
 
       setTimeout(() => {
         window.location.assign('/dashboard');

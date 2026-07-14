@@ -44,12 +44,14 @@ const Register = () => {
       
       // CRITICAL: Save the actual photo name returned by the server database
       localStorage.setItem('userProfile', JSON.stringify({
+        id: data.user?.id || data.user?._id || '',
         firstName: data.user?.firstName || formData.firstName,
         lastName: data.user?.lastName || formData.lastName,
         email: data.user?.email || formData.email,
         phone: data.user?.phone || formData.phone,
-        photo: data.user?.photo || '' // <--- Saved from server response
+        photo: data.user?.photo ? `http://localhost:5000/uploads/${data.user.photo}` : ''
       }));
+      localStorage.setItem('token', data.token);
 
       setTimeout(() => {
         window.location.assign('/dashboard');

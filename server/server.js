@@ -5,7 +5,9 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-const userRoutes = require('./routes/userRoutes');
+// Declare routes cleanly (only once!)
+const userRoutes = require('./routes/userroutes'); // Matches your file 'userroutes.js'
+const requestRoutes = require('./routes/requestroutes'); // Matches your file 'requestroutes.js'
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes mapping
 app.use('/api/users', userRoutes);
+app.use('/api/requests', requestRoutes); // Mount friend requests route system here
 
 // Connect to MongoDB using Native Promises
 const PORT = process.env.PORT || 5000;
