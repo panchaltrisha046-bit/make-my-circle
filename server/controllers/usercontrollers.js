@@ -1,5 +1,4 @@
-const User = require('../models/user'); // Ensure this matches your file name (user.js)
-const bcrypt = require('bcryptjs');
+const User = require('../models/user'); 
 const jwt = require('jsonwebtoken');
 
 // Helper to generate token
@@ -47,10 +46,6 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'User already exists with this email or phone' });
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     // Get uploaded filename if any
     const photo = req.file ? req.file.filename : '';
 
@@ -59,7 +54,7 @@ exports.register = async (req, res) => {
       lastName,
       email,
       phone,
-      password: hashedPassword,
+      password,
       photo,
     });
 
@@ -98,12 +93,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    let isMatch = false;
-    if (user.password && (user.password.startsWith('$2a$') || user.password.startsWith('$2b$') || user.password.startsWith('$2y$'))) {
-      isMatch = await bcrypt.compare(password, user.password);
-    } else {
-      isMatch = password === user.password;
-    }
+    const isMatch = password === user.password;
 
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
@@ -124,4 +114,4 @@ exports.login = async (req, res) => {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Login failed', error: error.message });
   }
-};
+};

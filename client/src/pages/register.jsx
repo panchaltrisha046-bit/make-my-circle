@@ -1,4 +1,3 @@
-// File Name: client/src/pages/Register.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/register.css'; 

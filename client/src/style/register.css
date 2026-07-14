@@ -8,7 +8,7 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* --- Sidebar Styling Styles --- */
+/* Sidebar Styling Styles  */
 .sidebar-panel {
   background-color: #ffffff;
   border-right: 1px solid #e2e8f0;
@@ -60,7 +60,7 @@
   color: #dc2626;
 }
 
-/* --- Newsfeed Central Panel Styles --- */
+/* Newsfeed Central Panel Styles */
 .main-content-panel {
   padding: 30px 40px;
   overflow-y: auto;
@@ -238,7 +238,7 @@
   color: #1e293b;
 }
 
-/* --- Right Sticky Profile Card Sidebar Widget --- */
+/* Right Sticky Profile Card Sidebar Widget */
 .right-profile-widget {
   background-color: #ffffff;
   border-left: 1px solid #e2e8f0;

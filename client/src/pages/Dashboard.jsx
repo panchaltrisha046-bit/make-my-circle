@@ -150,7 +150,7 @@ function Dashboard() {
 
         {/* User Profiles / Suggestions Grid */}
         <div className="UserList" style={{ marginBottom: '30px' }}>
-          <h2>People You May Know (Suggestions)</h2>
+          <h2>People You May Know</h2>
           <div className="suggestions-grid" style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
             {suggestions.length > 0 ? (
               suggestions.map((item) => (
