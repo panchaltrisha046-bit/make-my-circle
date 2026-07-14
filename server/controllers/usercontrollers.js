@@ -8,7 +8,7 @@ const generateToken = (id) => {
   });
 };
 
-// 1. Get Logged-in User Profile
+// Get Logged-in User Profile
 exports.getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -21,7 +21,7 @@ exports.getUserProfile = async (req, res) => {
   }
 };
 
-// 2. Get All Users Except Me
+// Get All Users Except Me
 exports.getAllUsersExceptMe = async (req, res) => {
   try {
     const currentUserId = req.user.id;
@@ -32,7 +32,7 @@ exports.getAllUsersExceptMe = async (req, res) => {
   }
 };
 
-// 3. Register User
+// Register User
 exports.register = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, password } = req.body;
@@ -79,7 +79,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// 4. Login User
+// Login User
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

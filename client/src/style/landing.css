@@ -24,7 +24,7 @@ body {
   overflow: hidden;
 }
 
-/* ===== NAVIGATION ===== */
+/*  NAVIGATION  */
 .navbar-landing {
   display: flex;
   justify-content: space-between;
@@ -94,7 +94,7 @@ body {
   box-shadow: 0 8px 16px rgba(118, 127, 158, 0.2);
 }
 
-/* ===== HERO SECTION ===== */
+/* HERO SECTION */
 .hero-section-landing {
   flex: 1;
   display: flex;

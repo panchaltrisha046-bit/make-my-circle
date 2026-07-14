@@ -1,13 +1,14 @@
-// File Name: server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
 // Declare routes cleanly (only once!)
-const userRoutes = require('./routes/userroutes'); // Matches your file 'userroutes.js'
-const requestRoutes = require('./routes/requestroutes'); // Matches your file 'requestroutes.js'
+const userRoutes = require('./routes/userroutes');
+const requestRoutes = require('./routes/requestroutes');
+const { resourceUsage } = require('process');
 
 const app = express();
 
@@ -17,11 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static profile pictures publicly
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+const uploadsDir = path.join(__dirname,"uploads");
+if(!fs.existsSync(uploadsDir)){
+  fs.mkdirSync(uploadsDir,{recursive:true});
+}
 
 // Routes mapping
 app.use('/api/users', userRoutes);
-app.use('/api/requests', requestRoutes); // Mount friend requests route system here
+app.use('/api/requests', requestRoutes); 
 
 // Connect to MongoDB using Native Promises
 const PORT = process.env.PORT || 5000;

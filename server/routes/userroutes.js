@@ -12,7 +12,7 @@ const { getUserProfile, getAllUsersExceptMe, register, login } = require('../con
 
 // Validate imports are real functions before giving them to Express
 if (!getUserProfile || !getAllUsersExceptMe || !register || !login) {
-  console.error("❌ ERROR: One of your user controller functions is undefined!");
+  console.error("ERROR: One of your user controller functions is undefined!");
   console.log("getUserProfile is:", typeof getUserProfile);
   console.log("getAllUsersExceptMe is:", typeof getAllUsersExceptMe);
   console.log("register is:", typeof register);

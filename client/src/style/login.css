@@ -38,7 +38,7 @@
   font-weight: 600;
 }
 
-/* Form group rows (Used for First Name / Last Name split) */
+/* Form group rows */
 .reg-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -97,7 +97,7 @@
   background-color: #636B7D;
 }
 
-/* Dynamic status messages alerts matches your screenshots */
+/* Dynamic status messages */
 .login-alert, .reg-alert {
   padding: 12px;
   border-radius: 10px;

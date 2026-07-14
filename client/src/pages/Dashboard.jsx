@@ -18,7 +18,8 @@ function Dashboard() {
 
     try {
       setLoading(true);
-      // 1. Fetch current user profile:
+
+      // Fetch current user profile
       const profileRes = await fetch('http://localhost:5000/api/users/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -28,7 +29,7 @@ function Dashboard() {
       const profileData = await profileRes.json();
       setCurrentUser(profileData);
 
-      // 2. Fetch suggestions:
+      // Fetch suggestions
       const suggestionsRes = await fetch('http://localhost:5000/api/requests/suggestions', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -37,7 +38,7 @@ function Dashboard() {
         setSuggestions(suggestionsData);
       }
 
-      // 3. Fetch incoming requests:
+      // Fetch incoming requests
       const requestsRes = await fetch('http://localhost:5000/api/requests/pending', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -110,7 +111,7 @@ function Dashboard() {
   return (
     <div className="dashboard-grid">
       
-      {/* COLUMN 1: SIDEBAR */}
+      {/*Side Bar*/}
       <aside className="sidebar">
         <div className="brand-container">
           <h2 className="brand-name">Make My Circle</h2>
@@ -124,11 +125,14 @@ function Dashboard() {
         </nav>
       </aside>
 
-      {/* COLUMN 2: MAIN WORKSPACE */}
+      {/*Main Bar*/}
+
       <main className="feed-channel">
+
         {/* Welcome Banner Card */}
+
         <div className="welcome-banner-card">
-          <h1>Welcome back, {currentName}!</h1>
+          <h1>Welcome back, {currentName} !</h1>
           <p>Grow your circle, connect with colleagues, and discover new communities.</p>
         </div>
 
@@ -148,37 +152,8 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* User Profiles / Suggestions Grid */}
-        <div className="UserList" style={{ marginBottom: '30px' }}>
-          <h2>People You May Know</h2>
-          <div className="suggestions-grid" style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
-            {suggestions.length > 0 ? (
-              suggestions.map((item) => (
-                <div key={item._id} className="suggestion-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px', background: '#fff', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div className="avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#767F9E' }}>
-                      {(item.name || item.firstName || 'U').charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                      <h3 style={{ fontSize: '1rem', margin: 0 }}>{item.name || `${item.firstName} ${item.lastName}`}</h3>
-                      <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>{item.email}</p>
-                    </div>
-                  </div>
-                  <button className="add-btn" onClick={() => handleSendRequest(item._id)} style={{ padding: '8px 16px', background: '#767F9E', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: '600' }}>
-                    Add Friend
-                  </button>
-                </div>
-              ))
-            ) : (
-              <div style={{ textAlign: 'center', padding: '30px', background: '#f8fafc', borderRadius: '12px', border: '1px dashed #cbd5e1' }}>
-                <p style={{ color: '#64748b', margin: 0, fontWeight: '500' }}>No new suggestions right now.</p>
-                <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '4px' }}>Check back later or invite colleagues to join your circle.</p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Featured Communities / Circles */}
+        
+        {/* Featured Communities or Circles */}
         <div className="UserList">
           <h2>Trending Circles</h2>
           <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '15px' }}>Join collaborative spaces related to your work and tech stack.</p>
@@ -205,7 +180,7 @@ function Dashboard() {
         </div>
       </main>
 
-      {/* COLUMN 3: REQUEST PANEL */}
+      {/* Request Panel*/}
       <aside className="profile-widget-panel">
         <div className="simple-box">
           <h2>Request Panel</h2>
@@ -223,8 +198,10 @@ function Dashboard() {
                       <h4 style={{ fontSize: '0.95rem', margin: 0 }}>{sender.name || `${sender.firstName} ${sender.lastName}`}</h4>
                     </div>
                     <div className="action-buttons" style={{ display: 'flex', gap: '10px' }}>
-                      <button className="accept-btn" onClick={() => handleRespond(requestId, 'accepted')} style={{ flex: 1, padding: '6px 12px', background: '#10b981', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>Accept</button>
-                      <button className="reject-btn" onClick={() => handleRespond(requestId, 'rejected')} style={{ flex: 1, padding: '6px 12px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>Reject</button>
+                      <button className="accept-btn" onClick={() => handleRespond(requestId, 'accepted')} style={{ flex: 1, padding: '6px 12px', background: '#10b981', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                      Accept</button>
+                      <button className="reject-btn" onClick={() => handleRespond(requestId, 'rejected')} style={{ flex: 1, padding: '6px 12px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                      Reject</button>
                     </div>
                   </div>
                 );
@@ -241,3 +218,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+

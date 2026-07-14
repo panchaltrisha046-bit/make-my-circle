@@ -1,7 +1,7 @@
-const User = require('../models/user'); // Ensure this matches your model name/path
+const User = require('../models/user'); 
 const FriendRequest = require('../models/friendrequest');
 
-// 1. Get other users except yourself, current friends, or pending requests
+// Get other users except yourself, current friends, or pending requests
 exports.getSuggestions = async (req, res) => {
   try {
     const myId = req.user.id;
@@ -20,8 +20,7 @@ exports.getSuggestions = async (req, res) => {
     excludedIds.push(myId);
 
     // Find all users who are NOT in the excluded list
-    const suggestions = await User.find({ _id: { $nin: excludedIds } })
-                                  .select('firstName lastName name email handle photo');
+    const suggestions = await User.find({ _id: { $nin: excludedIds } }).select('firstName lastName name email handle photo');
 
     res.status(200).json(suggestions);
   } catch (error) {
@@ -29,7 +28,7 @@ exports.getSuggestions = async (req, res) => {
   }
 };
 
-// 2. Send a friend request
+// Send a friend request
 exports.sendFriendRequest = async (req, res) => {
   try {
     const senderId = req.user.id;
@@ -51,18 +50,17 @@ exports.sendFriendRequest = async (req, res) => {
   }
 };
 
-// 3. Get all pending incoming requests for the logged-in user
+// Get all pending incoming requests for the logged-in user
 exports.getPendingRequests = async (req, res) => {
   try {
-    const pending = await FriendRequest.find({ receiver: req.user.id, status: 'pending' })
-                                       .populate('sender', 'firstName lastName name handle photo');
+    const pending = await FriendRequest.find({ receiver: req.user.id, status: 'pending' }).populate('sender', 'firstName lastName name handle photo');
     res.status(200).json(pending);
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve requests', error: error.message });
   }
 };
 
-// 4. Accept or Reject Request
+// Accept or Reject Request
 exports.respondToRequest = async (req, res) => {
   try {
     const { requestId } = req.params;

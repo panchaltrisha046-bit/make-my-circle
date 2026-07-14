@@ -1,4 +1,3 @@
-// File Name: client/src/pages/Login.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/login.css'; 
@@ -24,10 +23,10 @@ const Login = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Invalid credentials or password');
+        throw new Error(data.message || 'Invalid password');
       }
 
-      setSuccess('Logged in successfully! Redirecting...');
+      setSuccess('Logged in successfully!...');
 
       const userData = {
         id: data.user?.id || '',

@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const FriendRequestSchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // References your user.js model
+    ref: 'User',
     required: true
   },
   receiver: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // References your user.js model
+    ref: 'User',
     required: true
   },
   status: {
@@ -18,7 +18,7 @@ const FriendRequestSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Prevent duplicate pending requests between the same two users
+// pending requests between the same two users
 FriendRequestSchema.index({ sender: 1, receiver: 1 }, { unique: true });
 
 module.exports = mongoose.model('FriendRequest', FriendRequestSchema);
