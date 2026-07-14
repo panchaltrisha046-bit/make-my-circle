@@ -156,7 +156,7 @@ function Dashboard() {
               suggestions.map((item) => (
                 <div key={item._id} className="suggestion-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px', background: '#fff', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div className="avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#6366f1' }}>
+                    <div className="avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#767F9E' }}>
                       {(item.name || item.firstName || 'U').charAt(0).toUpperCase()}
                     </div>
                     <div>
@@ -164,7 +164,7 @@ function Dashboard() {
                       <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>{item.email}</p>
                     </div>
                   </div>
-                  <button className="add-btn" onClick={() => handleSendRequest(item._id)} style={{ padding: '8px 16px', background: '#6366f1', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: '600' }}>
+                  <button className="add-btn" onClick={() => handleSendRequest(item._id)} style={{ padding: '8px 16px', background: '#767F9E', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: '600' }}>
                     Add Friend
                   </button>
                 </div>
@@ -188,7 +188,7 @@ function Dashboard() {
               <h3 style={{ fontSize: '0.95rem', margin: 0, fontWeight: '600' }}>Surat Tech Developers</h3>
               <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '4px 0 0 0' }}>148 active members • JavaScript, React, Node.js</p>
             </div>
-            <button className="add-btn" onClick={() => alert("Joined Surat Tech Developers circle!")} style={{ padding: '6px 12px', background: '#edf2ff', color: '#4f46e5', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
+            <button className="add-btn" onClick={() => alert("Joined Surat Tech Developers circle!")} style={{ padding: '6px 12px', background: '#edf2ff', color: '#767F9E', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
               Join
             </button>
           </div>
@@ -198,7 +198,7 @@ function Dashboard() {
               <h3 style={{ fontSize: '0.95rem', margin: 0, fontWeight: '600' }}>UI/UX Pioneers</h3>
               <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '4px 0 0 0' }}>92 active members • Figma, Design Systems, CSS</p>
             </div>
-            <button className="add-btn" onClick={() => alert("Joined UI/UX Pioneers circle!")} style={{ padding: '6px 12px', background: '#edf2ff', color: '#4f46e5', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
+            <button className="add-btn" onClick={() => alert("Joined UI/UX Pioneers circle!")} style={{ padding: '6px 12px', background: '#edf2ff', color: '#767F9E', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
               Join
             </button>
           </div>
@@ -217,7 +217,7 @@ function Dashboard() {
                 return (
                   <div key={requestId} className="request-card" style={{ padding: '15px', background: '#fff', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-                      <div className="req-avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#6366f1' }}>
+                      <div className="req-avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#767F9E' }}>
                         {(sender.name || sender.firstName || 'U').charAt(0).toUpperCase()}
                       </div>
                       <h4 style={{ fontSize: '0.95rem', margin: 0 }}>{sender.name || `${sender.firstName} ${sender.lastName}`}</h4>

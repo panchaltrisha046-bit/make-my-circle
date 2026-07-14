@@ -52,7 +52,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title" style={{color: '#4f46e5', fontWeight: 'bold'}}>Make My Circle</h2>
+        <h2 className="login-title" style={{color: '#767F9E', fontWeight: 'bold'}}>Make My Circle</h2>
         <h3 className="login-subtitle">Welcome back</h3>
         {success && <div className="login-alert alert-success">{success}</div>}
         {error && <div className="login-alert alert-danger">{error}</div>}

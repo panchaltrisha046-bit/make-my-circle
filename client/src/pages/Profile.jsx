@@ -101,7 +101,7 @@ function Profile() {
           <h4 style={{ fontSize: '0.85rem', color: '#64748b', textTransform: 'uppercase', marginBottom: '12px' }}>Core Skills & Tech Stack</h4>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript', 'HTML5', 'CSS3', 'REST APIs', 'Git & GitHub'].map((skill) => (
-              <span key={skill} style={{ padding: '6px 12px', background: '#eef2ff', color: '#4f46e5', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>
+              <span key={skill} style={{ padding: '6px 12px', background: '#eef2ff', color: '#767F9E', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>
                 {skill}
               </span>
             ))}

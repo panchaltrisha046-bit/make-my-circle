@@ -18,7 +18,7 @@
 }
 
 .sidebar-brand h2 {
-  color: #4f46e5;
+  color: #767F9E;
   font-size: 1.4rem;
   font-weight: 700;
   margin: 0 0 40px 0;
@@ -52,7 +52,7 @@
 
 .sidebar-nav li:hover, .sidebar-nav li.active {
   background-color: #eeebff;
-  color: #4f46e5;
+  color: #767F9E;
 }
 
 .sidebar-nav li.logout-item:hover {
@@ -104,7 +104,7 @@
 }
 
 .highlight-name {
-  color: #4f46e5;
+  color: #767F9E;
   font-weight: 600;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .primary-post-btn {
-  background-color: #4f46e5;
+  background-color: #767F9E;
   color: #ffffff;
   border: none;
   padding: 9px 20px;
@@ -155,7 +155,7 @@
 }
 
 .primary-post-btn:hover {
-  background-color: #4338ca;
+  background-color: #636B7D;
 }
 
 /* Post list item layout */
@@ -188,7 +188,7 @@
   height: 40px;
   border-radius: 50%;
   background-color: #e0e7ff;
-  color: #4f46e5;
+  color: #767F9E;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -313,3 +313,4 @@
   color: #1e293b;
   border-color: #94a3b8;
 }
+

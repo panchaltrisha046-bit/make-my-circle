@@ -36,6 +36,7 @@ body {
 .brand-name {
   font-size: 1.15rem;
   font-weight: 700;
+  color: #767F9E;
 }
 
 .nav-menu ul {
@@ -56,7 +57,7 @@ body {
 
 .nav-item:hover, .nav-item.active {
   background-color: #f1f5f9;
-  color: #4f46e5;
+  color: #636B7D;
 }
 
 .nav-item.logout:hover {
@@ -151,7 +152,7 @@ body {
 
 .current-profile-btn {
   background: #ffffff;
-  color: #6366f1;
+  color: #767F9E;
   border: none;
   padding: 12px 28px;
   border-radius: 8px;
@@ -224,7 +225,7 @@ body {
 .post-creator-avatar {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -254,7 +255,7 @@ body {
 
 .post-textarea:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #767F9E;
   background: #ffffff;
 }
 
@@ -277,13 +278,13 @@ body {
 }
 
 .post-action-btn:hover {
-  border-color: #6366f1;
+  border-color: #767F9E;
   background: #f8f6ff;
 }
 
 .post-btn {
   padding: 8px 24px;
-  background: #6366f1;
+  background: #767F9E;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -294,7 +295,7 @@ body {
 }
 
 .post-btn:hover:not(:disabled) {
-  background: #4f46e5;
+  background: #636B7D;
 }
 
 .post-btn:disabled {
@@ -339,7 +340,7 @@ body {
 .post-author-avatar {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -415,7 +416,7 @@ body {
 
 .post-action-footer:hover {
   background: #f8fafc;
-  color: #6366f1;
+  color: #767F9E;
 }
 
 .empty-feed {
@@ -450,7 +451,7 @@ body {
 }
 
 .user-card-header {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -480,7 +481,7 @@ body {
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
-  color: #6366f1;
+  color: #767F9E;
 }
 
 .current-user-badge {
@@ -508,7 +509,7 @@ body {
 
 .user-card-email {
   font-size: 0.85rem;
-  color: #4f46e5;
+  color: #636B7D;
   margin-bottom: 6px;
 }
 
@@ -521,7 +522,7 @@ body {
 .user-card-btn {
   width: 100%;
   padding: 10px 16px;
-  background: #6366f1;
+  background: #767F9E;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -532,7 +533,7 @@ body {
 }
 
 .user-card-btn:hover {
-  background: #4f46e5;
+  background: #636B7D;
 }
 
 .loading-text,
@@ -556,7 +557,7 @@ body {
 .logged-user-avatar {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -579,7 +580,7 @@ body {
 
 /* Custom Dashboard Enhancements */
 .welcome-banner-card {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
   color: white;
   padding: 24px;
   border-radius: 16px;

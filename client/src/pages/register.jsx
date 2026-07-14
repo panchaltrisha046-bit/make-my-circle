@@ -64,7 +64,7 @@ const Register = () => {
   return (
     <div className="reg-container">
       <div className="reg-card">
-        <h2 className="reg-title" style={{color: '#4f46e5', fontWeight: 'bold'}}>Make My Circle</h2>
+        <h2 className="reg-title" style={{color: '#767F9E', fontWeight: 'bold'}}>Make My Circle</h2>
         <h3 className="reg-subtitle">Create your account</h3>
         {success && <div className="reg-alert alert-success">{success}</div>}
         {error && <div className="reg-alert alert-danger">{error}</div>}

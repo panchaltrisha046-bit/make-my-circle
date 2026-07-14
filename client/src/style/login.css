@@ -1,4 +1,3 @@
-/* Container layout matching your desktop view centering */
 .login-container, .reg-container {
   display: flex;
   justify-content: center;
@@ -25,7 +24,7 @@
 
 /* Titles and subheadings */
 .login-title, .reg-title {
-  color: #4f46e5;
+  color: #767F9E;
   margin: 0 0 8px 0;
   font-size: 1.75rem;
   font-weight: 700;
@@ -33,7 +32,7 @@
 }
 
 .login-subtitle, .reg-subtitle {
-  color: #1e293b;
+  color: #4b5371;
   margin: 0 0 6px 0;
   font-size: 1.35rem;
   font-weight: 600;
@@ -75,14 +74,14 @@
 
 /* Active focus behaviors */
 .login-group input:focus, .reg-group input:focus {
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: #767F9E;
+  box-shadow: 0 0 0 3px rgba(118, 127, 158, 0.1);
 }
 
 /* Primary Form Buttons */
 .login-btn, .reg-btn {
   width: 100%;
-  background-color: #4f46e5;
+  background-color: #767F9E;
   color: #ffffff;
   border: none;
   padding: 12px 20px;
@@ -95,7 +94,7 @@
 }
 
 .login-btn:hover, .reg-btn:hover {
-  background-color: #4338ca;
+  background-color: #636B7D;
 }
 
 /* Dynamic status messages alerts matches your screenshots */
@@ -129,7 +128,7 @@
 }
 
 .login-redirect a, .reg-redirect a {
-  color: #4f46e5;
+  color: #636B7D;
   text-decoration: none;
   font-weight: 600;
 }
