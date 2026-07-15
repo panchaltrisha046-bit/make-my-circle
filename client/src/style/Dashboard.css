@@ -7,7 +7,6 @@
 body {
   background-color: #f8fafc;
   font-family: 'Inter', system-ui, sans-serif;
-  color: #0f172a;
 }
 /* Dashboard  */
 .welcome-banner-card {
@@ -108,7 +107,7 @@ body {
 
 .feed-channel {
   padding: 30px;
-  background-color: #E5EEE4;
+  background-color: #FBFBFB;
 }
 
 .profile-widget-panel {
