@@ -54,13 +54,13 @@ function Profile() {
 
       {/* User Detail */}
       <section className="profile-details-card">
-          <header className="profile-header-card">
+        <header className="profile-header-card">
         <div className="profile-identity-row">
         <div className="avatar-frame">
-          <div className="avatar-placeholder">
+        <div className="avatar-placeholder">
             {avatarText}
-          </div>
         </div>
+      </div>
           <button className="btn-edit-profile" onClick={() => alert("Profile Edited")}>
             Edit Profile
           </button>
