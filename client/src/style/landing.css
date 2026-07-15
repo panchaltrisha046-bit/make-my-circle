@@ -170,21 +170,20 @@ body {
 }
 
 .primary-cta {
-  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
-  color: white;
+  background: white;
+  color: #767F9E;
   padding: 1rem 2.5rem;
   border-radius: 12px;
   text-decoration: none;
   font-weight: 700;
   font-size: 1.05rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(118, 127, 158, 0.3);
+  border: 2px solid #767F9E;
   display: inline-block;
 }
 
 .primary-cta:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(118, 127, 158, 0.4);
+  background: #767F9E;
+  color: white;
 }
 
 .secondary-cta {
@@ -196,46 +195,16 @@ body {
   font-weight: 700;
   font-size: 1.05rem;
   border: 2px solid #767F9E;
-  transition: all 0.3s ease;
   display: inline-block;
 }
 
 .secondary-cta:hover {
   background: #767F9E;
   color: white;
-  transform: translateY(-4px);
 }
 
 .hero-visual {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@media (max-width: 768px) {
-  .navbar-landing {
-    padding: 1.2rem 1.5rem;
-  }
-
-  .hero-section-landing {
-    padding: 3rem 1.5rem;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-  }
-
-  .primary-cta,
-  .secondary-cta {
-    width: 100%;
-    text-align: center;
-  }
 }
