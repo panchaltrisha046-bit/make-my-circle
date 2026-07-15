@@ -44,7 +44,7 @@ function Profile() {
 
   return (
     <div className="profile-page-container">
-      
+    
       {/* Back to Dashboard navigation link  */}
       <div className="profile-navigation-header">
         <button className="btn-back-link" onClick={() => navigate('/dashboard')}>
