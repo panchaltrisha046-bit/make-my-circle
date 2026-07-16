@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profile.css';
@@ -15,8 +14,9 @@ function Profile() {
       return;
     }
 
-    if (storedUser.id) {
-      fetch(`http://localhost:5000/api/users/${storedUser.id}`)
+    const userId = storedUser.id || storedUser._id;
+    if (userId) {
+      fetch(`http://localhost:5000/api/users/${userId}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.user) {
@@ -33,7 +33,7 @@ function Profile() {
   }, [navigate]);
 
   if (!user) {
-    return <div className="profile-page-container">Loading profile...</div>;
+    return <div className="profile-loading">Loading profile...</div>;
   }
 
   const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'User';
@@ -43,56 +43,55 @@ function Profile() {
     : 'Joined recently';
 
   return (
-    <div className="profile-page-container">
+    <div className="profile-layout">
     
-      {/* Back to Dashboard navigation link  */}
-      <div className="profile-navigation-header">
-        <button className="btn-back-link" onClick={() => navigate('/dashboard')}>
-         Back to Dashboard
+      {/* Back Button Area */}
+      <div className="top-navigation">
+        <button className="back-btn" onClick={() => navigate('/dashboard')}>
+          Back to Dashboard
         </button>
       </div>
 
-      {/* User Detail */}
-      <div className="profile-details-card">
-        <header className="profile-header-card">
-        <div className="profile-identity-row">
-        <div className="avatar-frame">
-        <div className="avatar-placeholder">
-            {avatarText}
-        </div>
-      </div>
-          <button className="btn-edit-profile" onClick={() => alert("Profile Edited")}>
+      {/* Profile Info Container */}
+      <div className="profile-card">
+        <header className="card-header">
+          <div className="profile-avatar">{avatarText}</div>
+          <button className="edit-btn" onClick={() => alert("Profile Edited")}>
             Edit Profile
           </button>
+        </header>
+
+        <h1 className="profile-name">{fullName}</h1>
+        <p className="profile-email">{user.email}</p>
+
+        {/* Bio Section */}
+        <div className="bio-section">
+          <h3>BIO</h3>
+          <p>
+            Hello! I am a passionate Full Stack Web Developer based in Surat, Gujarat. I love building modern web applications.
+          </p>
         </div>
-      </header>
-
-        <h1 className="user-fullname">{fullName}</h1>
-        <p className="user-handle" style={{fontWeight: '500', fontSize: '1rem', marginTop: '4px'}}>{user.email}</p>
-
-        {/*Bio*/}
-        <p className="user-bio" style={{ marginTop: '4px', color: '#475569', fontSize: '0.95rem', lineHeight: '1.6',gap: '20px', padding: '20px 0', borderTop: '2px solid #d9e2ec'}}>
-          <h4 style={{color:'#64748b'}}>BIO</h4>
-          Hello! I am a passionate Full Stack Web Developer based in Surat, Gujarat. I love building modern, 
-        </p>
         
-        {/* Profile information */}
-        <div className="profile-info-grid" style={{ display: 'grid', gap: '20px', marginTop: '4px', padding: '20px 0', borderTop: '2px solid #f1f5f9'}}>
-          <h4 style={{color:'#64748b'}}>PERSONAL INFORMATION</h4>
-          <div>
-            <h5 style={{ fontSize: '0.85rem', color: '#64748b', textTransform: 'uppercase', marginBottom: '6px' }}>Contact Information</h5>
-            <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155'}}><strong>Phone:</strong> {user.phone || 'Not added'}</p>
-            <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155' }}><strong>Email:</strong> {user.email}</p>
+        {/* Personal Details Section */}
+        <div className="info-section">
+          <h3>PERSONAL INFORMATION</h3>
+          
+          <div className="info-block">
+            <h4>Contact Information</h4>
+            <p><strong>Phone:</strong> {user.phone || 'Not added'}</p>
+            <p><strong>Email:</strong> {user.email}</p>
           </div>
-          <div>
-            <h5 style={{ fontSize: '0.85rem', color: '#64748b', textTransform: 'uppercase', marginBottom: '6px' }}>Location & Timeline</h5>
-            <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155' }}><strong>Location:</strong> Surat, Gujarat, India</p>
-            <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155' }}><strong>Timeline:</strong> {joinedDate}</p>
+          
+          <div className="info-block">
+            <h4>Location &amp; Timeline</h4>
+            <p><strong>Location:</strong> Surat, Gujarat, India</p>
+            <p><strong>Timeline:</strong> {joinedDate}</p>
           </div>
-          <div>
-            <h5 style={{ fontSize: '0.85rem', color: '#64748b', textTransform: 'uppercase', marginBottom: '6px' }}>Professional Status</h5>
-            <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155' }}><strong>Role:</strong> MERN Stack Developer</p>
-            <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155' }}><strong>Circle:</strong> Active Member</p>
+          
+          <div className="info-block">
+            <h4>Professional Status</h4>
+            <p><strong>Role:</strong> MERN Stack Developer</p>
+            <p><strong>Circle:</strong> Active Member</p>
           </div>
         </div>
       </div>

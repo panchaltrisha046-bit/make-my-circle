@@ -1,4 +1,8 @@
-.register-container {
+/* ==========================================================================
+   Simplified Register Component Stylesheet
+   ========================================================================== */
+
+.register-page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,18 +13,18 @@
   box-sizing: border-box;
 }
 
-.register-card {
+.register-box {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 40px;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
   box-sizing: border-box;
 }
 
-.register-title {
+.page-title {
   color: #767F9E;
   font-size: 1.6rem;
   font-weight: 700;
@@ -29,7 +33,7 @@
   letter-spacing: -0.02em;
 }
 
-.register-subtitle {
+.page-subtitle {
   color: #64748b;
   font-size: 1rem;
   font-weight: 400;
@@ -37,23 +41,23 @@
   text-align: center;
 }
 
-.register-row {
+.form-row {
   display: flex;
   gap: 16px;
   width: 100%;
 }
 
-.register-row .register-group {
+.form-row .form-group {
   flex: 1;
 }
 
-.register-group {
+.form-group {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.register-group label {
+.form-group label {
   display: block;
   font-size: 0.88rem;
   font-weight: 500;
@@ -61,10 +65,10 @@
   margin-bottom: 6px;
 }
 
-.register-group input[type="text"],
-.register-group input[type="email"],
-.register-group input[type="tel"],
-.register-group input[type="password"] {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
   width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
@@ -77,19 +81,19 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.register-group input:focus {
+.form-group input:focus {
   border-color: #767F9E;
   box-shadow: 0 0 0 3px rgba(118, 127, 158, 0.15);
 }
 
-.register-group input[type="file"] {
+.form-group input[type="file"] {
   padding: 6px 0;
   font-size: 0.9rem;
   color: #64748b;
   cursor: pointer;
 }
 
-.register-group input[type="file"]::file-selector-button {
+.form-group input[type="file"]::file-selector-button {
   background-color: #f1f5f9;
   color: #475569;
   border: 1px solid #e2e8f0;
@@ -98,15 +102,9 @@
   font-weight: 500;
   cursor: pointer;
   margin-right: 10px;
-  transition: background-color 0.2s;
 }
 
-.register-group input[type="file"]::file-selector-button:hover {
-  background-color: #e2e8f0;
-  color: #1e293b;
-}
-
-.register-btn {
+.submit-btn {
   width: 100%;
   background-color: #767F9E;
   color: #ffffff;
@@ -120,11 +118,11 @@
   transition: background-color 0.2s;
 }
 
-.register-btn:hover {
+.submit-btn:hover {
   background-color: #636B7D;
 }
 
-.register-alert {
+.alert {
   padding: 12px 16px;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -144,21 +142,20 @@
   border: 1px solid #fca5a5;
 }
 
-.register-redirect {
+.redirect-text {
   font-size: 0.9rem;
   color: #64748b;
   text-align: center;
   margin: 24px 0 0 0;
 }
 
-.register-redirect a {
+.redirect-text a {
   color: #767F9E;
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s;
 }
 
-.register-redirect a:hover {
+.redirect-text a:hover {
   color: #636B7D;
   text-decoration: underline;
 }

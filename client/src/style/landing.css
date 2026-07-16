@@ -1,4 +1,13 @@
-* { margin: 0; padding: 0; box-sizing: border-box; border: none; outline: none; }
+/* ==========================================================================
+   Global Resets & Base Configuration
+   ========================================================================== */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  border: none; 
+  outline: none; 
+}
 
 html, body, #root {
   height: 100%;
@@ -7,22 +16,28 @@ html, body, #root {
 }
 
 body { 
-  font-family: 'Inter'; 
-  background: #FBFBFB ;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+  background: #FBFBFB;
   border: none;
   outline: none;
 }
 
-.landing-wrapper {
+/* ==========================================================================
+   Landing Component Layout Styles
+   ========================================================================== */
+
+/* Main Full-Page Viewport Container */
+.landing-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   border: none;
   overflow: hidden;
+  background-color: #FBFBFB;
 }
 
-/* Main Section */
-.hero-section-landing {
+/* Content Area Wrapper */
+.landing-hero {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -37,22 +52,18 @@ body {
   overflow: hidden;
 }
 
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-title {
+/* Big Hero Brand Headline */
+.landing-maintitle {
   font-size: 4rem;
   font-weight: 900;
   line-height: 1.2;
   margin-bottom: 1.4rem;
-  color:#64748b;
+  color: #767F9E;
+  letter-spacing: -0.02em;
 }
 
-.hero-subtitle {
+/* Description Sub-Paragraph Text */
+.landing-text {
   font-size: 1.30rem;
   color: #64748b;
   margin-bottom: 2.5rem;
@@ -61,14 +72,20 @@ body {
   max-width: 600px;
 }
 
-.cta-buttons {
+/* Flexbox Action Block Grouping */
+.landing-buttons {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.primary-cta {
+/* ==========================================================================
+   Interactive Navigation Buttons / Links
+   ========================================================================== */
+
+/* Primary Button: Sign In / Registration Anchor Link */
+.btn-register {
   background: white;
   color: #767F9E;
   padding: 1rem 2.5rem;
@@ -78,14 +95,17 @@ body {
   font-size: 1.05rem;
   border: 2px solid #767F9E;
   display: inline-block;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
-.primary-cta:hover {
+.btn-register:hover {
   background: #767F9E;
   color: white;
 }
 
-.secondary-cta {
+/* Secondary Button: Login / Authenticated Anchor Link */
+.btn-login {
   background: white;
   color: #767F9E;
   padding: 1rem 2.5rem;
@@ -95,15 +115,11 @@ body {
   font-size: 1.05rem;
   border: 2px solid #767F9E;
   display: inline-block;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
-.secondary-cta:hover {
+.btn-login:hover {
   background: #767F9E;
   color: white;
-}
-
-.hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

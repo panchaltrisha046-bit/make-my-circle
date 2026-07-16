@@ -9,7 +9,7 @@ function Dashboard() {
   const [incomingRequests, setIncomingRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const loadDashboardData = () => {
+  function loadDashboardData() {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/login');
@@ -67,14 +67,13 @@ function Dashboard() {
       .finally(() => {
         setLoading(false);
       });
-  };
+  }
 
   useEffect(() => {
     loadDashboardData();
   }, [navigate]);
 
-  // Handle Accept and Reject Data
-  const handleRespond = (requestId, status) => {
+  function handleRespond(requestId, status) {
     const token = localStorage.getItem('token');
 
     fetch(`http://localhost:5000/api/requests/respond/${requestId}`, {
@@ -97,10 +96,9 @@ function Dashboard() {
         }
       })
       .catch((err) => console.error('Error processing response:', err));
-  };
+  }
 
-  // Handle Send Request Data
-  const handleSendRequest = (targetUserId) => {
+  function handleSendRequest(targetUserId) {
     const token = localStorage.getItem('token');
 
     fetch(`http://localhost:5000/api/requests/send/${targetUserId}`, {
@@ -125,52 +123,52 @@ function Dashboard() {
       .catch((err) => {
         console.error("Error sending request:", err);
       });
-  };
+  }
 
   if (loading || !currentUser) {
-    return <div className="loading-screen"><p>Loading Make My Circle...</p></div>;
+    return (
+      <div className="loading-screen">
+        <p>Loading Make My Circle...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="dashboard-grid">
-      {/* Side Bar Container */}
-      <div className="sidebar">
-        <div className="brand-container">
-          <h2 className="brand-name">Make My Circle</h2>
+    <div className="main-layout">
+      
+      {/* Sidebar Navigation */}
+      <div className="sidebar-menu">
+        <div className="brand-box">
+          <h2 className="brand-text">Make My Circle</h2>
         </div>
-        <nav className="nav-menu">
+        <nav className="nav-list">
           <ul>
-            <li className="nav-item active" onClick={() => navigate('/dashboard')}>Home</li>
-            <li className="nav-item" onClick={() => navigate('/profile')}>Profile</li>
-            <li className="nav-item logout" onClick={() => { localStorage.clear(); navigate('/login'); }}>
+            <li className="menu-link active" onClick={() => navigate('/dashboard')}>Home</li>
+            <li className="menu-link" onClick={() => navigate('/profile')}>Profile</li>
+            <li className="menu-link log-out" onClick={() => { localStorage.clear(); navigate('/login'); }}>
               Logout
             </li>
           </ul>
         </nav>
       </div>
 
-      {/* Main Container */}
-      <div className="feed-channel">
-        {/* Welcome Banner Card */}
-        <div className="welcome-banner-card">
-          <h1>Welcome back, {currentUser.name || `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || 'User'} !</h1>
+      {/* Center Feed Component */}
+      <div className="content-feed">
+        <div className="welcome-box">
+          <h1>Welcome back, {currentUser.name || `${currentUser.firstName || ''} ${currentUser.lastName || ''}` || 'User'}!</h1>
           <p>Grow your circle, connect with colleagues, and discover new communities.</p>
         </div>
 
-        {/* Suggested People */}
-        <div className="UserList suggestions-panel">
-          <div className="section-header">
-            <div>
-              <h2>Suggested People</h2>
-            </div>
-          </div>
+        {/* Suggested Connections List */}
+        <div className="people-panel">
+          <h2 className="panel-title">Suggested People</h2>
 
           {suggestions.filter((user) => {
             const userId = user._id || user.id;
             const currentUserId = currentUser?._id || currentUser?.id;
             return userId ? String(userId) !== String(currentUserId) : true;
           }).length > 0 ? (
-            <div className="suggestions-list">
+            <div className="user-cards-stack">
               {suggestions
                 .filter((user) => {
                   const userId = user._id || user.id;
@@ -179,19 +177,19 @@ function Dashboard() {
                 })
                 .map((user) => {
                   const userId = user._id || user.id;
-                  const userName = user.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'User';
+                  const userName = user.name || `${user.firstName || ''} ${user.lastName || ''}` || 'User';
                   const initials = (user.name || user.firstName || 'U').charAt(0).toUpperCase();
 
                   return (
-                    <div key={userId} className="suggestion-card">
-                      <div className="suggestion-user">
-                        <div className="suggestion-avatar">{initials}</div>
+                    <div key={userId} className="user-card">
+                      <div className="user-info">
+                        <div className="user-avatar">{initials}</div>
                         <div>
                           <h3>{userName}</h3>
                           <p>{user.email || 'New connection'}</p>
                         </div>
                       </div>
-                      <button className="add-btn" onClick={() => handleSendRequest(userId)}>
+                      <button className="invite-btn" onClick={() => handleSendRequest(userId)}>
                         Send Request
                       </button>
                     </div>
@@ -199,36 +197,34 @@ function Dashboard() {
                 })}
             </div>
           ) : (
-            <p className="empty-state">No new suggestions right now.</p>
+            <p className="no-data-text">No new suggestions right now.</p>
           )}
         </div>
       </div>
 
-      {/* Structured Right Panel Side Container */}
-      <div className="profile-widget-panel">
-        <div className="simple-box">
-          <h2>Request Panel</h2>
-          <div className="requests-list" style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
+      {/* Right Side Control Panel */}
+      <div className="action-panel">
+        <div className="inner-box">
+          <h2 className="panel-title">Request Panel</h2>
+          <div className="requests-stack">
             {incomingRequests.length > 0 ? (
               incomingRequests.map((request) => {
                 const sender = request.sender || {};
                 const requestId = request._id;
-                const senderName = sender.name || `${sender.firstName || ''} ${sender.lastName || ''}`.trim() || 'New User';
+                const senderName = sender.name || `${sender.firstName || ''} ${sender.lastName || ''}` || 'New User';
                 const avatarInitial = (sender.name || sender.firstName || 'U').charAt(0).toUpperCase();
 
                 return (
-                  <div key={requestId} className="request-card" style={{ padding: '15px', background: '#fff', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-                      <div className="req-avatar" style={{ width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#767F9E' }}>
-                        {avatarInitial}
-                      </div>
-                      <h4 style={{ fontSize: '0.95rem', margin: 0 }}>{senderName}</h4>
+                  <div key={requestId} className="request-card">
+                    <div className="request-user">
+                      <div className="request-avatar">{avatarInitial}</div>
+                      <h4>{senderName}</h4>
                     </div>
-                    <div className="action-buttons" style={{ display: 'flex', gap: '10px' }}>
-                      <button className="accept-btn" onClick={() => handleRespond(requestId, 'accepted')} style={{ flex: 1, padding: '6px 12px', background: '#10b981', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                    <div className="button-group">
+                      <button className="confirm-btn" onClick={() => handleRespond(requestId, 'accepted')}>
                         Accept
                       </button>
-                      <button className="reject-btn" onClick={() => handleRespond(requestId, 'rejected')} style={{ flex: 1, padding: '6px 12px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                      <button className="decline-btn" onClick={() => handleRespond(requestId, 'rejected')}>
                         Reject
                       </button>
                     </div>
@@ -236,11 +232,12 @@ function Dashboard() {
                 );
               })
             ) : (
-              <p style={{ color: '#64748b', fontSize: '0.9rem' }}>No pending requests.</p>
+              <p className="no-data-text">No pending requests.</p>
             )}
           </div>
         </div>
       </div>
+
     </div>
   );
 }

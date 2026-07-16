@@ -21,7 +21,7 @@ const Login = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          // If response status is not 200-299, extract the error message from the backend
+
           return res.json().then((errData) => {
             throw new Error(errData.message || 'Invalid email or password');
           });
@@ -43,10 +43,7 @@ const Login = () => {
         localStorage.setItem('userProfile', JSON.stringify(userData));
         localStorage.setItem('token', data.token);
 
-        setTimeout(() => {
-          navigate('/dashboard');
-        }, 1000);
-      })
+        setTimeout(() => {navigate('/dashboard');});})
       .catch((err) => {
         setError(err.message);
       });

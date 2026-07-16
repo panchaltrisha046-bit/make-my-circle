@@ -1,7 +1,7 @@
 const User = require('../models/user'); 
 const jwt = require('jsonwebtoken');
 
-// Helper to generate token
+// generate token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET || 'secret_fallback_key', {
     expiresIn: '30d',

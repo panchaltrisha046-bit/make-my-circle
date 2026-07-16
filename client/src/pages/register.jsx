@@ -17,7 +17,7 @@ function Register() {
     setError('');
     setSuccess('');
 
-    // --- Validations without .trim() ---
+    // Validations
     if (formData.firstName === "") {
       alert("Please Enter Your First Name");
       return;
@@ -119,43 +119,43 @@ function Register() {
   }
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <h2 className="register-title" style={{color: '#767F9E', fontWeight: 'bold'}}>Make My Circle</h2>
-        <h3 className="register-subtitle">Create your account</h3>
-        {success && <div className="register-alert alert-success">{success}</div>}
-        {error && <div className="register-alert alert-danger">{error}</div>}
+    <div className="register-page">
+      <div className="register-box">
+        <h2 className="page-title" style={{color: '#767F9E', fontWeight: 'bold'}}>Make My Circle</h2>
+        <h3 className="page-subtitle">Create your account</h3>
+        {success && <div className="alert alert-success">{success}</div>}
+        {error && <div className="alert alert-danger">{error}</div>}
 
         <form onSubmit={handleRegisterSubmit}>
-          <div className="register-row">
-            <div className="register-group">
+          <div className="form-row">
+            <div className="form-group">
               <label>First Name</label>
               <input type="text" required value={formData.firstName} onChange={(e) => setFormData({...formData, firstName: e.target.value})} />
             </div>
-            <div className="register-group">
+            <div className="form-group">
               <label>Last Name</label>
               <input type="text" required value={formData.lastName} onChange={(e) => setFormData({...formData, lastName: e.target.value})} />
             </div>
           </div>
-          <div className="register-group">
+          <div className="form-group">
             <label>Email Address</label>
             <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
           </div>
-          <div className="register-group">
+          <div className="form-group">
             <label>Phone Number</label>
             <input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
           </div>
-          <div className="register-group">
+          <div className="form-group">
             <label>Password</label>
             <input type="password" required value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} />
           </div>
-          <div className="register-group">
+          <div className="form-group">
             <label>Upload Profile Picture</label>
             <input type="file" accept="image/*" onChange={handleFileChange} required />
           </div>
-          <button type="submit" className="register-btn">Register</button>
+          <button type="submit" className="submit-btn">Register</button>
         </form>
-        <p className="register-redirect">Already have an account? <Link to="/login">Log In </Link></p>
+        <p className="redirect-text">Already have an account? <Link to="/login">Log In </Link></p>
       </div>
     </div>
   );
