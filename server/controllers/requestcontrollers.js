@@ -85,3 +85,16 @@ exports.respondToRequest = async (req, res) => {
     res.status(500).json({ message: 'Action failed', error: error.message });
   }
 };
+
+// Fetch all friend requests sent by the logged-in user
+exports.getSentRequests = (req, res) => {
+  // Assuming your model is named FriendRequest (from your friendrequest.js model file)
+  FriendRequest.find({ sender: req.user.id })
+    .populate('receiver', 'name firstName lastName email') 
+    .then((sentRequests) => {
+      res.status(200).json(sentRequests);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Error fetching sent requests', error: err });
+    });
+};

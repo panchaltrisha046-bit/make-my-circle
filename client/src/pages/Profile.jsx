@@ -53,7 +53,7 @@ function Profile() {
       </div>
 
       {/* User Detail */}
-      <section className="profile-details-card">
+      <div className="profile-details-card">
         <header className="profile-header-card">
         <div className="profile-identity-row">
         <div className="avatar-frame">
@@ -74,7 +74,6 @@ function Profile() {
         <p className="user-bio" style={{ marginTop: '4px', color: '#475569', fontSize: '0.95rem', lineHeight: '1.6',gap: '20px', padding: '20px 0', borderTop: '2px solid #d9e2ec'}}>
           <h4 style={{color:'#64748b'}}>BIO</h4>
           Hello! I am a passionate Full Stack Web Developer based in Surat, Gujarat. I love building modern, 
-          user-focused web applications with the MERN stack (MongoDB, Express, React, Node.js) and connecting with fellow tech professionals.
         </p>
         
         {/* Profile information */}
@@ -96,7 +95,7 @@ function Profile() {
             <p style={{ margin: '4px 0', fontSize: '0.9rem', color: '#334155' }}><strong>Circle:</strong> Active Member</p>
           </div>
         </div>
-      </section>
+      </div>
 
     </div>
   );
