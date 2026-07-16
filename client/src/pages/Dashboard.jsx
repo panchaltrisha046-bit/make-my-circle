@@ -152,14 +152,14 @@ function Dashboard() {
         </nav>
       </div>
 
-      {/* Center Feed Component */}
+      {/* Welcome Component */}
       <div className="content-feed">
         <div className="welcome-box">
           <h1>Welcome back, {currentUser.name || `${currentUser.firstName || ''} ${currentUser.lastName || ''}` || 'User'}!</h1>
           <p>Grow your circle, connect with colleagues, and discover new communities.</p>
         </div>
 
-        {/* Suggested Connections List */}
+        {/* Suggested Profiles */}
         <div className="people-panel">
           <h2 className="panel-title">Suggested People</h2>
 
