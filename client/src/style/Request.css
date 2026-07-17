@@ -1,0 +1,218 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f8fafc;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Master Grid Structure - Matches Dashboard Exactly */
+.main-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar Copy-Paste from Dashboard for 1:1 Alignment */
+.sidebar-menu {
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.brand-text {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #767F9E;
+}
+
+.nav-list ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-link {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-link:hover, 
+.menu-link.active {
+  background-color: #f1f5f9;
+  color: #636B7D;
+}
+
+.menu-link.log-out:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+/* Main Workspace Content Area */
+.requests-layout-container {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  background-color: #FBFBFB;
+  align-items: flex-start;
+}
+
+/* Twin Panels Layout Grid */
+.requests-panel {
+  flex: 1;
+  background: #ffffff;
+  border: 2px solid rgba(203, 213, 225, 0.5);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 400px;
+}
+
+.requests-panel-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.requests-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Items & Cards inside Panels */
+.request-card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 16px;
+  background: #f8fafc;
+  border: 2px solid rgba(203, 213, 225, 0.5);
+  border-radius: 10px;
+}
+
+.request-user-meta, .tracker-card-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.request-user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #767F9E 0%, #636B7D 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.request-username {
+  font-size: 0.95rem;
+  color: #1e293b;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.request-email {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Action Controls */
+.request-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-accept-action {
+  padding: 8px 14px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.btn-reject-action {
+  padding: 8px 14px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.btn-accept-action:hover, .btn-reject-action:hover {
+  opacity: 0.9;
+}
+
+/* Status Labels - High Visibility UI Colors */
+.status-indicator-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Pending: Vibrant Amber/Orange */
+.status-indicator-badge.badge-pending {
+  background-color: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #ffedd5;
+}
+
+/* Connected/Accepted: Crisp Emerald Green */
+.status-indicator-badge.badge-accepted {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+/* Rejected: Modern Crimson Red */
+.status-indicator-badge.badge-rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Global Loading State Screen Component */
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #FBFBFB;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 1.1rem;
+}

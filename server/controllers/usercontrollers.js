@@ -41,9 +41,25 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'Please enter all fields' });
     }
 
-    const userExists = await User.findOne({ $or: [{ email }, { phone }] });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists with this email or phone' });
+    // Check database for both records
+    const emailExists = await User.findOne({ email });
+    const phoneExists = await User.findOne({ phone });
+
+    // Both are already registered
+    if (emailExists && phoneExists) {
+      return res.status(400).json({ 
+        message: 'Both this email and phone number are already registered.' 
+      });
+    }
+
+    // Only Email is registered
+    if (emailExists) {
+      return res.status(400).json({ message: 'This email address is already registered' });
+    }
+
+    // Only Phone is registered
+    if (phoneExists) {
+      return res.status(400).json({ message: 'This phone number is already registered' });
     }
 
     // Get uploaded filename if any
@@ -82,19 +98,47 @@ exports.register = async (req, res) => {
 // Login User
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, phone, password } = req.body;
 
-    if (!email || !password) {
+    // 1. Check if password is provided, and at least one of email or phone is present
+    if (!password || (!email && !phone)) {
       return res.status(400).json({ message: 'Please enter all fields' });
     }
 
-    const user = await User.findOne({ email });
+    // 2. If phone is provided, validate that it starts with '+' and international code
+    if (phone) {
+      // Must start with '+'
+      if (!phone.startsWith('+')) {
+        return res.status(400).json({ 
+          message: "Phone number must include your country code starting with '+' " 
+        });
+      }
+
+      // Strips out non-numeric characters to check total digit count
+      const cleanPhoneDigitsOnly = phone.replace(/[^0-9]/g, '');
+      
+      // Standard ITU-T international phone numbers are between 7 to 15 digits
+      if (cleanPhoneDigitsOnly.length < 7 || cleanPhoneDigitsOnly.length > 15) {
+        return res.status(400).json({ 
+          message: "Please enter a valid international phone number " 
+        });
+      }
+    }
+
+    // 3. Find user by email OR phone depending on what was sent
+    let user;
+    if (email) {
+      user = await User.findOne({ email });
+    } else if (phone) {
+      user = await User.findOne({ phone });
+    }
+
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
+    // 4. Match password
     const isMatch = password === user.password;
-
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }

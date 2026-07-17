@@ -4,26 +4,44 @@ import '../style/login.css';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState(''); 
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    setError('');
     setSuccess('');
+
+    const cleanIdentifier = identifier.trim();
+
+    const isEmail = cleanIdentifier.includes('@');
+    
+    if (!isEmail) {
+      if (!cleanIdentifier.startsWith('+')) {
+        alert("Phone number must include your country code starting with '+' (e.g., +919876543210)");
+        return;
+      }
+
+      const cleanPhoneDigitsOnly = cleanIdentifier.replace(/[^0-9]/g, '');
+      if (cleanPhoneDigitsOnly.length < 7 || cleanPhoneDigitsOnly.length > 15) {
+        alert("Please enter a valid international phone number (e.g. +919876543210)");
+        return;
+      }
+    }
+
+    const requestBody = isEmail 
+      ? { email: cleanIdentifier, password } 
+      : { phone: cleanIdentifier, password };
 
     fetch('http://localhost:5000/api/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(requestBody),
     })
       .then((res) => {
         if (!res.ok) {
-
           return res.json().then((errData) => {
-            throw new Error(errData.message || 'Invalid email or password');
+            throw new Error(errData.message || 'Invalid credentials');
           });
         }
         return res.json();
@@ -35,17 +53,20 @@ const Login = () => {
           id: data.user?.id || '',
           firstName: data.user?.firstName || 'User',
           lastName: data.user?.lastName || '',
-          email: data.user?.email || email,
-          phone: data.user?.phone || '',
+          email: data.user?.email || (isEmail ? cleanIdentifier : ''),
+          phone: data.user?.phone || (!isEmail ? cleanIdentifier : ''),
           photo: data.user?.photo ? `http://localhost:5000/uploads/${data.user.photo}` : ''
         };
 
         localStorage.setItem('userProfile', JSON.stringify(userData));
         localStorage.setItem('token', data.token);
 
-        setTimeout(() => {navigate('/dashboard');});})
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 500);
+      })
       .catch((err) => {
-        setError(err.message);
+        alert(err.message);
       });
   };
 
@@ -55,16 +76,26 @@ const Login = () => {
         <h2 className="login-title" style={{color: '#767F9E', fontWeight: 'bold'}}>Make My Circle</h2>
         <h3 className="login-subtitle">Welcome back</h3>
         {success && <div className="login-alert alert-success">{success}</div>}
-        {error && <div className="login-alert alert-danger">{error}</div>}
 
         <form onSubmit={handleLoginSubmit}>
           <div className="login-group">
-            <label>Email Address</label>
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label>Email or Phone Number</label>
+            <input 
+              type="text" 
+              placeholder="e.g. name@email.com or +91 9876543210"
+              required 
+              value={identifier} 
+              onChange={(e) => setIdentifier(e.target.value)} 
+            />
           </div>
           <div className="login-group">
             <label>Password</label>
-            <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input 
+              type="password" 
+              required 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            />
           </div>
           <button type="submit" className="login-btn">Log In</button>
         </form>
