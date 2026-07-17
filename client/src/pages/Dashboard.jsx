@@ -146,6 +146,7 @@ function Dashboard() {
                 })}
             </div>
           ) : (
+            
             <p className="no-data-text">No new suggestions.</p>
           )}
         </div>
