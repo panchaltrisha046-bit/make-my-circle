@@ -5,6 +5,7 @@ import '../style/landing.css';
 function Landing() {
   return (
     <div className="landing-container">
+      
       {/* Main Section */}
       <section className="landing-hero">
         <h1 className="landing-maintitle">Make My Circle</h1>

@@ -18,13 +18,13 @@ const Login = () => {
     
     if (!isEmail) {
       if (!cleanIdentifier.startsWith('+')) {
-        alert("Phone number must include your country code starting with '+' (e.g., +919876543210)");
+        alert("Phone number must include your country code starting with '+' (e.g., +91 9876543210)");
         return;
       }
 
       const cleanPhoneDigitsOnly = cleanIdentifier.replace(/[^0-9]/g, '');
       if (cleanPhoneDigitsOnly.length < 7 || cleanPhoneDigitsOnly.length > 15) {
-        alert("Please enter a valid international phone number (e.g. +919876543210)");
+        alert("Please enter a valid international phone number (e.g. +91 9876543210)");
         return;
       }
     }

@@ -14,7 +14,7 @@ function Dashboard() {
       navigate('/login');
       return;
     }
-
+// Handle Showing Profiles
     setLoading(true);
 
     fetch('http://localhost:5000/api/users/profile', {
@@ -45,6 +45,7 @@ function Dashboard() {
       });
   }
 
+  // Handle friend requests sending
   useEffect(() => {
     loadDashboardData();
   }, [navigate]);
@@ -106,7 +107,6 @@ function Dashboard() {
       <div className="content-feed">
         <div className="welcome-box">
           <h1>Welcome back, {currentUser.name || `${currentUser.firstName || ''} ${currentUser.lastName || ''}` || 'User'}!</h1>
-          <p>Grow your circle, connect with colleagues, and discover new communities.</p>
         </div>
 
         <div className="people-panel">

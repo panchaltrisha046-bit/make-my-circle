@@ -5,11 +5,10 @@
   min-height: 100vh;
   background-color:#FBFBFB;
   padding: 20px;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui;
   box-sizing: border-box;
 }
 
-/* Card layout wrapper */
 .login-card, .reg-card {
   background: #ffffff;
   padding: 40px;
@@ -22,7 +21,6 @@
   box-sizing: border-box;
 }
 
-/* Titles and subheadings */
 .login-title, .reg-title {
   color: #767F9E;
   margin: 0 0 8px 0;
@@ -38,14 +36,12 @@
   font-weight: 600;
 }
 
-/* Form group rows */
 .reg-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-/* Individual inputs container */
 .login-group, .reg-group {
   margin-bottom: 20px;
   text-align: left;
@@ -72,13 +68,11 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Active focus behaviors */
 .login-group input:focus, .reg-group input:focus {
   border-color: #767F9E;
   box-shadow: 0 0 0 3px rgba(118, 127, 158, 0.1);
 }
 
-/* Primary Form Buttons */
 .login-btn, .reg-btn {
   width: 100%;
   background-color: #767F9E;
@@ -120,7 +114,6 @@
   border-color: #bbf7d0;
 }
 
-/* Bottom redirect link routing styles */
 .login-redirect, .reg-redirect {
   margin-top: 24px;
   font-size: 0.9rem;

@@ -6,17 +6,15 @@
 
 body {
   background-color: #f8fafc;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui;
 }
 
-/* Master Grid Structure - Matches Dashboard Exactly */
 .main-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
 }
 
-/* Sidebar Copy-Paste from Dashboard for 1:1 Alignment */
 .sidebar-menu {
   background-color: #ffffff;
   border-right: 1px solid #e2e8f0;
@@ -65,7 +63,7 @@ body {
   color: #dc2626;
 }
 
-/* Main Workspace Content Area */
+
 .requests-layout-container {
   display: flex;
   gap: 30px;
@@ -74,7 +72,7 @@ body {
   align-items: flex-start;
 }
 
-/* Twin Panels Layout Grid */
+
 .requests-panel {
   flex: 1;
   background: #ffffff;
@@ -97,7 +95,6 @@ body {
   gap: 12px;
 }
 
-/* Items & Cards inside Panels */
 .request-card-item {
   display: flex;
   justify-content: space-between;
@@ -140,7 +137,6 @@ body {
   margin: 0;
 }
 
-/* Action Controls */
 .request-actions {
   display: flex;
   gap: 8px;
@@ -172,7 +168,6 @@ body {
   opacity: 0.9;
 }
 
-/* Status Labels - High Visibility UI Colors */
 .status-indicator-badge {
   padding: 6px 14px;
   border-radius: 20px;
@@ -184,28 +179,25 @@ body {
   display: inline-block;
 }
 
-/* Pending: Vibrant Amber/Orange */
+
 .status-indicator-badge.badge-pending {
   background-color: #fff7ed;
   color: #ea580c;
   border: 1px solid #ffedd5;
 }
 
-/* Connected/Accepted: Crisp Emerald Green */
 .status-indicator-badge.badge-accepted {
   background-color: #d1fae5;
   color: #065f46;
   border: 1px solid #a7f3d0;
 }
 
-/* Rejected: Modern Crimson Red */
 .status-indicator-badge.badge-rejected {
   background-color: #fee2e2;
   color: #991b1b;
   border: 1px solid #fecaca;
 }
 
-/* Global Loading State Screen Component */
 .loading-screen {
   display: flex;
   justify-content: center;

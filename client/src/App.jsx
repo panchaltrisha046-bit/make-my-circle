@@ -6,7 +6,7 @@ import Login from './pages/login';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Profile from './pages/Profile';
-import Requests from './pages/Requests'; // Updated path to match your folder structure!
+import Requests from './pages/Requests'; 
 
 function App() {
   return (
