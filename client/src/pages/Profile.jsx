@@ -62,7 +62,7 @@ function Profile() {
               </button>
             </div>
           </header>
-          <h2 className="profile-name">{fullName}</h2>
+          <h3 className="profile-name">{fullName}</h3>
           <p className="profile-email">{user.email}</p>
 
           <div className="bio-section">
@@ -84,13 +84,9 @@ function Profile() {
             </div>
           </div>
           <div className="info-block">
-
             <h4>Professional Status</h4>
-
             <p><strong>Role:</strong> MERN Stack Developer</p>
-
             <p><strong>Circle:</strong> Active Member</p>
-
           </div>
         </div>
       </div>

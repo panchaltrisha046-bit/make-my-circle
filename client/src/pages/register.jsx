@@ -224,7 +224,7 @@ function Register() {
             <label>Phone Number</label>
             <input 
               type="text" 
-              placeholder="e.g. +91 9876543210"
+              placeholder=""
               value={formData.phone} 
               onChange={(e) => setFormData({...formData, phone: e.target.value})} />
           </div>

@@ -82,7 +82,7 @@ const Login = () => {
             <label>Email or Phone Number</label>
             <input 
               type="text" 
-              placeholder="e.g. name@email.com or +91 9876543210"
+              placeholder=""
               required 
               value={identifier} 
               onChange={(e) => setIdentifier(e.target.value)} 
