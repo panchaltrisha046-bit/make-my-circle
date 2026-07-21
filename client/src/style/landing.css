@@ -1,125 +1,688 @@
-/* ==========================================================================
-   Global Resets & Base Configuration
-   ========================================================================== */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-  border: none; 
-  outline: none; 
-}
-
-html, body, #root {
-  height: 100%;
-  border: none;
-  outline: none;
-}
-
-body { 
-  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
-  background: #FBFBFB;
-  border: none;
-  outline: none;
-}
+@import './global.css';
 
 /* ==========================================================================
-   Landing Component Layout Styles
+   Professional SaaS Landing Page - Make My Circle
+   Clean Glassmorphic UI with Dynamic Canvas Visuals
    ========================================================================== */
 
-/* Main Full-Page Viewport Container */
-.landing-container {
+/* 1. Global Setup */
+.pro-landing-page {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
   min-height: 100vh;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* 2. Header Style */
+.pro-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  z-index: 100;
+  padding: 16px 24px;
+}
+
+.pro-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pro-brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.pro-brand span {
+  color: var(--brand-primary);
+}
+
+.pro-nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.pro-nav-links a {
+  font-size: 0.92rem;
+  font-weight: 550;
+  color: var(--text-secondary);
+  transition: color 0.25s ease;
+  text-decoration: none;
+}
+
+.pro-nav-links a:hover {
+  color: var(--brand-primary);
+}
+
+.pro-auth-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.pro-btn-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.pro-btn-text:hover {
+  color: var(--brand-primary);
+}
+
+/* 3. Base Buttons */
+.pro-btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pro-btn-primary {
+  background: var(--brand-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.pro-btn-primary:hover {
+  background: var(--brand-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+}
+
+.pro-btn-lg {
+  padding: 14px 28px;
+  font-size: 1rem;
+  border-radius: 14px;
+}
+
+.pro-btn-gradient {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.pro-btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.35);
+}
+
+.pro-btn-outline {
+  border: 1px solid var(--border-medium);
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.pro-btn-outline:hover {
+  background: #f1f5f9;
+  border-color: var(--text-secondary);
+}
+
+/* 4. Hero Section */
+.pro-hero-section {
+  padding: 80px 24px;
+  background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 45%);
+}
+
+.pro-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.pro-hero-text {
+  max-width: 540px;
+}
+
+.pro-pill {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--brand-primary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pro-hero-text h1 {
+  font-size: clamp(2.5rem, 5vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.pro-hero-text p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.pro-hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* 5. Glass Dashboard Visual Mockup */
+.pro-hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.glass-dashboard-card {
+  width: 100%;
+  max-width: 480px;
+  height: 320px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 20px;
+  box-shadow: var(--shadow-premium);
   display: flex;
   flex-direction: column;
-  border: none;
   overflow: hidden;
-  background-color: #FBFBFB;
+  position: relative;
 }
 
-/* Content Area Wrapper */
-.landing-hero {
+.dashboard-header-mock {
+  height: 28px;
+  background: rgba(241, 245, 249, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+}
+
+.dot-mock {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
+}
+
+.dot-mock:nth-child(1) { background: #f87171; }
+.dot-mock:nth-child(2) { background: #fbbf24; }
+.dot-mock:nth-child(3) { background: #34d399; }
+
+.dashboard-body-mock {
+  flex: 1;
+  display: flex;
+}
+
+.mock-sidebar {
+  width: 80px;
+  background: rgba(248, 250, 252, 0.6);
+  border-right: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mock-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--brand-primary);
+  margin-bottom: 12px;
+}
+
+.mock-item {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #e2e8f0;
+}
+
+.mock-item.active {
+  background: var(--brand-primary);
+}
+
+.mock-main {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mock-top {
+  width: 120px;
+  height: 12px;
+  border-radius: 6px;
+  background: #cbd5e1;
+}
+
+.mock-bubbles {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 6rem 3rem;
-  width: 100%;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.bubble-mock {
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  max-width: 75%;
+  font-weight: 550;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.bubble-mock.left {
+  background: #f1f5f9;
+  color: #334155;
+  align-self: flex-start;
+}
+
+.bubble-mock.left.active {
+  border-left: 3px solid #ff007f;
+}
+
+.bubble-mock.right {
+  background: var(--brand-primary);
+  color: #ffffff;
+  align-self: flex-end;
+}
+
+/* 6. Features Grid Section */
+.pro-features-section {
+  padding: 100px 24px;
+  background: #ffffff;
+}
+
+.section-title-wrap {
   text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Big Hero Brand Headline */
-.landing-maintitle {
-  font-size: 4rem;
-  font-weight: 900;
-  line-height: 1.2;
-  margin-bottom: 1.4rem;
-  color: #767F9E;
-  letter-spacing: -0.02em;
-}
-
-/* Description Sub-Paragraph Text */
-.landing-text {
-  font-size: 1.30rem;
-  color: #64748b;
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
-  font-weight: 500;
   max-width: 600px;
+  margin: 0 auto 60px;
 }
 
-/* Flexbox Action Block Grouping */
-.landing-buttons {
+.section-title-wrap h2 {
+  font-size: 2.1rem;
+  font-weight: 850;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+
+.section-title-wrap p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+.pro-features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.feature-item-card {
+  padding: 36px;
+  background: var(--gray-50);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: var(--shadow-xs);
+}
+
+.feature-item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+.feature-item-card h3 {
+  font-size: 1.15rem;
+  font-weight: 750;
+  margin-bottom: 12px;
+}
+
+.feature-item-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 7. Connection Visualizer Plugin Area */
+.pro-visualizer-section {
+  padding: 100px 24px;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pro-visualizer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.visualizer-intro h2 {
+  font-size: 2.1rem;
+  font-weight: 850;
+  margin-bottom: 16px;
+  letter-spacing: -0.025em;
+}
+
+.visualizer-intro p {
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  font-size: 1.05rem;
+}
+
+.visualizer-form {
   display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.visualizer-form input {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-medium);
+  font-size: 0.95rem;
+  background: #ffffff;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.visualizer-form input:focus {
+  border-color: var(--brand-primary);
+}
+
+.pro-btn-reset {
+  background: none;
+  border: none;
+  color: var(--brand-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.25s;
+}
+
+.pro-btn-reset:hover {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.visualizer-canvas-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.connection-canvas {
+  background: #1e293b;
+  border-radius: 20px;
+  box-shadow: var(--shadow-xl);
+  max-width: 100%;
+}
+
+.canvas-footnote {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  font-weight: 550;
+}
+
+/* 8. Testimonials Style */
+.pro-testimonials-section {
+  padding: 100px 24px;
+  background: #ffffff;
+}
+
+.testimonials-card {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px;
+  background: rgba(99, 102, 241, 0.02);
+  border: 1px dashed rgba(99, 102, 241, 0.2);
+  border-radius: 24px;
+}
+
+.testimonial-quote {
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.testimonial-meta strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.testimonial-meta span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.testimonial-dots {
+  display: flex;
   justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
 }
 
-/* ==========================================================================
-   Interactive Navigation Buttons / Links
-   ========================================================================== */
-
-/* Primary Button: Sign In / Registration Anchor Link */
-.btn-register {
-  background: white;
-  color: #767F9E;
-  padding: 1rem 2.5rem;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.05rem;
-  border: 2px solid #767F9E;
-  display: inline-block;
+.testimonial-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.3s;
 }
 
-.btn-register:hover {
-  background: #767F9E;
-  color: white;
+.testimonial-dots .dot.active {
+  background: var(--brand-primary);
 }
 
-/* Secondary Button: Login / Authenticated Anchor Link */
-.btn-login {
-  background: white;
-  color: #767F9E;
-  padding: 1rem 2.5rem;
-  border-radius: 12px;
-  text-decoration: none;
+/* 9. Collapsible FAQ Accordion */
+.pro-faq-section {
+  padding: 100px 24px;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-light);
+}
+
+.faq-accordion-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.faq-item.open {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 1.02rem;
   font-weight: 700;
-  font-size: 1.05rem;
-  border: 2px solid #767F9E;
-  display: inline-block;
+  text-align: left;
+  color: var(--text-primary);
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  outline: none;
 }
 
-.btn-login:hover {
-  background: #767F9E;
-  color: white;
+.faq-icon-arrow {
+  font-size: 1.2rem;
+  color: var(--brand-primary);
+}
+
+.faq-answer-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 24px;
+}
+
+.faq-item.open .faq-answer-panel {
+  max-height: 200px;
+  padding-bottom: 20px;
+}
+
+.faq-answer-panel p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 10. Footer Area */
+.pro-footer {
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid #1e293b;
+}
+
+.pro-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.pro-footer p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* 11. Responsive Layout Adaptations */
+@media (max-width: 968px) {
+  .pro-header {
+    padding: 16px;
+  }
+  
+  .pro-nav-links {
+    display: none; /* Hide basic header links on tablets */
+  }
+  
+  .pro-hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 36px;
+  }
+  
+  .pro-hero-text {
+    max-width: 100%;
+  }
+  
+  .pro-logo-pill {
+    align-self: center;
+  }
+  
+  .pro-hero-buttons {
+    justify-content: center;
+  }
+  
+  .pro-visualizer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 36px;
+  }
+  
+  .visualizer-form {
+    max-width: 480px;
+    margin: 0 auto 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pro-auth-actions {
+    gap: 12px;
+  }
+  
+  .pro-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .pro-hero-section {
+    padding: 40px 16px;
+  }
+  
+  .pro-features-section,
+  .pro-visualizer-section,
+  .pro-testimonials-section,
+  .pro-faq-section {
+    padding: 60px 16px;
+  }
+  
+  .testimonials-card {
+    padding: 24px;
+  }
+  
+  .testimonial-quote {
+    font-size: 1.15rem;
+  }
 }

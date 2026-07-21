@@ -1,25 +1,20 @@
 const User = require('../models/user'); 
 const FriendRequest = require('../models/friendrequest');
+const { createNotification } = require('./notificationController');
+const { getSuggestionExcludedIds } = require('../utils/requestHelpers');
 
-// Get other users except yourself, current friends, or pending requests
+// Get other users except yourself, users with pending requests, and users with accepted follow relationships.
+// Rejected users will reappear in suggestions so they can be requested again.
 exports.getSuggestions = async (req, res) => {
   try {
     const myId = req.user.id;
 
-    // Find all requests involving you (sent or received) that are accepted or pending
-    const existingRequests = await FriendRequest.find({
+    const allRequests = await FriendRequest.find({
       $or: [{ sender: myId }, { receiver: myId }]
     });
 
-    // Extract the IDs of these connected/pending users
-    const excludedIds = existingRequests.map(reqDoc => 
-      reqDoc.sender.toString() === myId ? reqDoc.receiver.toString() : reqDoc.sender.toString()
-    );
-    
-    // Add yourself to the excluded list
-    excludedIds.push(myId);
+    const excludedIds = getSuggestionExcludedIds(myId, allRequests);
 
-    // Find all users who are NOT in the excluded list
     const suggestions = await User.find({ _id: { $nin: excludedIds } }).select('firstName lastName name email handle photo');
 
     res.status(200).json(suggestions);
@@ -38,11 +33,58 @@ exports.sendFriendRequest = async (req, res) => {
       return res.status(400).json({ message: 'You cannot send a request to yourself' });
     }
 
-    const newRequest = await FriendRequest.create({
-      sender: senderId,
-      receiver: receiverId,
-      status: 'pending'
+    const existingRequest = await FriendRequest.findOne({
+      $or: [
+        { sender: senderId, receiver: receiverId },
+        { sender: receiverId, receiver: senderId }
+      ],
+      status: { $in: ['pending', 'accepted'] }
     });
+
+    if (existingRequest) {
+      const isAccepted = existingRequest.status === 'accepted';
+      if (isAccepted) {
+        return res.status(400).json({ message: 'You are already connected with this user.' });
+      }
+      return res.status(400).json({
+        message: 'A request is already pending between these users.'
+      });
+    }
+
+    // If a rejected request exists, update it to pending; otherwise create a new one
+    const rejectedRequest = await FriendRequest.findOne({
+      $or: [
+        { sender: senderId, receiver: receiverId },
+        { sender: receiverId, receiver: senderId }
+      ],
+      status: 'rejected'
+    });
+
+    let newRequest;
+    if (rejectedRequest) {
+      newRequest = await FriendRequest.findByIdAndUpdate(
+        rejectedRequest._id,
+        { status: 'pending' },
+        { new: true }
+      );
+    } else {
+      newRequest = await FriendRequest.create({
+        sender: senderId,
+        receiver: receiverId,
+        status: 'pending'
+      });
+    }
+
+    const senderUser = await User.findById(senderId).select('firstName lastName photo');
+    if (senderUser) {
+      await createNotification({
+        recipientId: receiverId,
+        actorId: senderId,
+        type: 'friend_request',
+        message: `${senderUser.firstName || 'Someone'} sent you a follow request`,
+        io: req.app.locals.io
+      });
+    }
 
     res.status(201).json({ message: 'Friend request sent!', data: newRequest });
   } catch (error) {
@@ -57,6 +99,21 @@ exports.getPendingRequests = async (req, res) => {
     res.status(200).json(pending);
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve requests', error: error.message });
+  }
+};
+
+// Get all requests that involve the logged-in user, regardless of status
+exports.getMyRequests = async (req, res) => {
+  try {
+    const myRequests = await FriendRequest.find({
+      $or: [{ sender: req.user.id }, { receiver: req.user.id }]
+    })
+      .populate('sender', 'firstName lastName name email')
+      .populate('receiver', 'firstName lastName name email');
+
+    res.status(200).json(myRequests);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to retrieve all requests', error: error.message });
   }
 };
 
@@ -90,7 +147,7 @@ exports.respondToRequest = async (req, res) => {
 exports.getSentRequests = (req, res) => {
   // Assuming your model is named FriendRequest (from your friendrequest.js model file)
   FriendRequest.find({ sender: req.user.id })
-    .populate('receiver', 'name firstName lastName email') 
+    .populate('receiver', 'name firstName lastName email photo') 
     .then((sentRequests) => {
       res.status(200).json(sentRequests);
     })

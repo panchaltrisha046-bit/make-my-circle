@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Profile from './pages/Profile';
 import Requests from './pages/Requests'; 
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/requests" element={<Requests />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </div>
     </Router>

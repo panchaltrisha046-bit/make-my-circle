@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext.jsx';
 import '../style/login.css'; 
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { loginUser } = useUser();
   const [identifier, setIdentifier] = useState(''); 
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('');
@@ -33,7 +37,7 @@ const Login = () => {
       ? { email: cleanIdentifier, password } 
       : { phone: cleanIdentifier, password };
 
-    fetch('http://localhost:5000/api/users/login', {
+    fetch(`${API_URL}/api/users/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody),
@@ -55,11 +59,21 @@ const Login = () => {
           lastName: data.user?.lastName || '',
           email: data.user?.email || (isEmail ? cleanIdentifier : ''),
           phone: data.user?.phone || (!isEmail ? cleanIdentifier : ''),
-          photo: data.user?.photo ? `http://localhost:5000/uploads/${data.user.photo}` : ''
+          photo: data.user?.photo || ''
         };
 
-        localStorage.setItem('userProfile', JSON.stringify(userData));
-        localStorage.setItem('token', data.token);
+        loginUser(userData, data.token);
+
+        fetch(`${API_URL}/api/requests/pending`, {
+          headers: { Authorization: `Bearer ${data.token}` }
+        })
+          .then((pendingRes) => (pendingRes.ok ? pendingRes.json() : []))
+          .then((pendingData) => {
+            if (Array.isArray(pendingData) && pendingData.length > 0) {
+              setSuccess(`Logged in successfully! You have ${pendingData.length} pending request${pendingData.length > 1 ? 's' : ''}.`);
+            }
+          })
+          .catch(() => {});
 
         setTimeout(() => {
           navigate('/dashboard');

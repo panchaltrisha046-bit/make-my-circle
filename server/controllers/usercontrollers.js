@@ -15,6 +15,10 @@ exports.getUserProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
+    if (!user.credentialId) {
+      user.credentialId = `MMC-${Math.floor(100000 + Math.random() * 900000)}`;
+      await user.save();
+    }
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: 'Failed to retrieve profile.', error: error.message });
@@ -62,8 +66,7 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'This phone number is already registered' });
     }
 
-    // Get uploaded filename if any
-    const photo = req.file ? req.file.filename : '';
+    const photo = req.file ? `/uploads/${req.file.filename}` : (req.body.photo || '');
 
     const user = await User.create({
       firstName,
@@ -96,6 +99,97 @@ exports.register = async (req, res) => {
 };
 
 // Login User
+exports.updateProfilePhoto = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const photo = req.file ? `/uploads/${req.file.filename}` : (req.body.photo || '');
+
+    if (!photo) {
+      return res.status(400).json({ message: 'Please select a photo.' });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { photo },
+      { new: true }
+    ).select('-password');
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update profile photo.', error: error.message });
+  }
+};
+
+// Update Profile Credentials & Details
+exports.updateProfileCredentials = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const {
+      firstName,
+      lastName,
+      phone,
+      bio,
+      role,
+      company,
+      location,
+      education,
+      skills,
+      certifications,
+      github,
+      linkedin,
+      website
+    } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    if (firstName !== undefined) user.firstName = firstName;
+    if (lastName !== undefined) user.lastName = lastName;
+    if (phone !== undefined) user.phone = phone;
+    if (bio !== undefined) user.bio = bio;
+    if (role !== undefined) user.role = role;
+    if (company !== undefined) user.company = company;
+    if (location !== undefined) user.location = location;
+    if (education !== undefined) user.education = education;
+
+    if (skills !== undefined) {
+      user.skills = Array.isArray(skills)
+        ? skills
+        : typeof skills === 'string'
+        ? skills.split(',').map((s) => s.trim()).filter(Boolean)
+        : [];
+    }
+
+    if (certifications !== undefined) {
+      user.certifications = Array.isArray(certifications)
+        ? certifications
+        : typeof certifications === 'string'
+        ? certifications.split(',').map((c) => c.trim()).filter(Boolean)
+        : [];
+    }
+
+    if (github !== undefined) user.github = github;
+    if (linkedin !== undefined) user.linkedin = linkedin;
+    if (website !== undefined) user.website = website;
+
+    if (!user.credentialId) {
+      user.credentialId = `MMC-${Math.floor(100000 + Math.random() * 900000)}`;
+    }
+
+    await user.save();
+    const updatedUser = await User.findById(userId).select('-password');
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update profile credentials.', error: error.message });
+  }
+};
+
 exports.login = async (req, res) => {
   try {
     const { email, phone, password } = req.body;

@@ -1,0 +1,230 @@
+@import './global.css';
+
+/* ==========================================================================
+   Notification Bell - Make My Circle
+   Modern UI with Soft Color Palette
+   ========================================================================== */
+
+.notification-bell-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0;
+}
+
+.notification-bell {
+  border: none;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  color: #ffffff;
+  border-radius: 999px;
+  width: 46px;
+  height: 46px;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+  box-shadow: 0 8px 22px rgba(99, 102, 241, 0.2);
+}
+
+.notification-bell:hover {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
+}
+
+.notification-bell:active {
+  transform: scale(1.03);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: linear-gradient(135deg, var(--error) 0%, #dc2626 100%);
+  color: white;
+  border-radius: 999px;
+  min-width: 22px;
+  padding: 4px 7px;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.24);
+  border: 2px solid #ffffff;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.notification-dropdown {
+  position: absolute;
+  right: 0;
+  top: 54px;
+  width: min(340px, calc(100vw - 32px));
+  background: var(--bg-card);
+  border-radius: 20px;
+  box-shadow: 0 12px 50px rgba(99, 102, 241, 0.2);
+  z-index: 20;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  animation: scaleIn 0.3s ease;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 2px solid var(--border-light);
+  background: linear-gradient(135deg, var(--bg-hover) 0%, var(--secondary-100) 100%);
+}
+
+.notification-header strong {
+  font-size: 1rem;
+  color: var(--brand-dark);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.notification-header span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.notification-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-light);
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--bg-card);
+}
+
+.notification-item:hover {
+  background: linear-gradient(135deg, var(--bg-hover) 0%, var(--bg-secondary) 100%);
+  transform: translateX(4px);
+}
+
+.notification-item.unread {
+  background: linear-gradient(135deg, var(--bg-hover) 0%, var(--bg-secondary) 100%);
+  border-left: 4px solid var(--brand-primary);
+}
+
+.notification-item .avatar-image,
+.notification-item .avatar-fallback {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+  border: 3px solid #ffffff;
+}
+
+.notification-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-body p {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.notification-body small {
+  color: var(--text-tertiary);
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.notification-empty {
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+}
+
+.notification-toast {
+  position: absolute;
+  right: 0;
+  top: -70px;
+  min-width: 260px;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  color: #ffffff;
+  padding: 16px 20px;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(99, 102, 241, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 25;
+  animation: slideInRight 0.4s ease;
+}
+
+.notification-toast strong {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.notification-toast span {
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .notification-dropdown {
+    width: min(300px, calc(100vw - 32px));
+    right: -10px;
+  }
+  
+  .notification-toast {
+    right: 10px;
+    min-width: 240px;
+  }
+}
